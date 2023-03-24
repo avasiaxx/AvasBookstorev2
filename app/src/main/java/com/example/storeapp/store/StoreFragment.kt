@@ -1,4 +1,4 @@
-package com.example.storeapp.fragments
+package com.example.storeapp.store
 
 import android.os.Bundle
 import android.view.*
@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.storeapp.adapters.StoreAdapter
 import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentStoreListBinding
 
@@ -28,12 +27,9 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setHasOptionsMenu(true)
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

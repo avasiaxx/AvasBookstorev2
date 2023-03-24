@@ -1,12 +1,10 @@
-package com.example.storeapp.fragments
+package com.example.storeapp.store
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.storeapp.data.Datasource
-import com.example.storeapp.models.StoreItem
-import java.lang.ref.WeakReference
 
 class StoreViewModel : ViewModel(){
 

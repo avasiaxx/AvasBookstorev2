@@ -1,4 +1,4 @@
-package com.example.storeapp.models
+package com.example.storeapp.store
 
 import android.content.Context
 import androidx.annotation.DrawableRes

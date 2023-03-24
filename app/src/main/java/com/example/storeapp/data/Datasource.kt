@@ -1,7 +1,7 @@
 package com.example.storeapp.data
 
 import android.content.Context
-import com.example.storeapp.models.StoreItem
+import com.example.storeapp.store.StoreItem
 import com.example.storeapp.R
 object Datasource {
 

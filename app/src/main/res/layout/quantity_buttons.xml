@@ -17,7 +17,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/decrease_quantity"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/decrease_quantity_icon"
                 app:iconPadding="0dp"
@@ -43,7 +43,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/increase_quantity"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/increase_quantity_icon"
                 app:iconPadding="0dp"

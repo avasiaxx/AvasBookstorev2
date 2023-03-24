@@ -23,15 +23,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> {
+                    navController.navigate(R.id.storeFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.cart -> {
+                    navController.navigate(R.id.cartFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.account -> {
+                    //navController.navigate(R.id.accountFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.menu ->{
+                    //navController.navigate(R.id.settingsFragment)
                     return@setOnItemSelectedListener true
                 }
             }

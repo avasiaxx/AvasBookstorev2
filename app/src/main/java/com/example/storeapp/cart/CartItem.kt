@@ -1,23 +1,14 @@
 package com.example.storeapp.cart
 
 import com.example.storeapp.store.StoreItem
-import android.content.Context
 
-class CartItem(
-    val quantity: Int,
-    val cost: Double,
-    val storeItem: StoreItem
+data class CartItem(
+    var storeItem: StoreItem,
+    var quantity: Int
 ) {
-    companion object
-    {
-        fun setData(
-            quantity: Int,
-            cost: Double,
-            storeItem: StoreItem
-        ) = CartItem(
-                quantity = quantity,
-                storeItem = storeItem,
-                cost = cost
-                )
+    fun createCart(
+        storeItem: StoreItem
+    ){
+        this.storeItem = storeItem
     }
 }

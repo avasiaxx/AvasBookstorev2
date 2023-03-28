@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,8 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         get() = _binding!!
 
     private val storeViewModel: StoreViewModel by viewModels()
+
+    private val cartViewModel: CartViewModel by activityViewModels()
 
     private lateinit var adapter: StoreAdapter
 
@@ -60,8 +63,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         super.onViewCreated(view, savedInstanceState)
         //Binding the fragment class binding
         _binding = FragmentStoreListBinding.bind(view)
-        adapter = StoreAdapter(storeViewModel::onIncrease,
-            storeViewModel::onDecrease)
+        adapter = StoreAdapter(cartViewModel::onIncrease)
         binding.recyclerView.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)

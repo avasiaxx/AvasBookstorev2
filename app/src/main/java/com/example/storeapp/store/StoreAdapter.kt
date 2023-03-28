@@ -4,17 +4,16 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.storeapp.cart.CartItem
+import com.example.storeapp.cart.CartViewModel
 import com.example.storeapp.databinding.FragmentStoreItemBinding
-
 
 
 /**
  * [RecyclerView.Adapter] that can display a [StoreItem].
- * TODO: Replace the implementation with code for your data type.
  */
 class StoreAdapter(
-    private val onIncrease: (StoreItem) -> Unit,
-    private val onDecrease: (StoreItem) -> Unit
+    private val onIncrease: (StoreItem) -> Unit
 ) : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
 
     private val values = mutableListOf<StoreItem>()
@@ -48,18 +47,13 @@ class StoreAdapter(
     inner class ViewHolder(
         private val binding: FragmentStoreItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemDescription
 
         fun bind(storeItem: StoreItem){
             binding.itemTitle.text = storeItem.itemName
             binding.itemDescription.text = storeItem.itemDescription
             binding.itemImage.setImageResource(storeItem.imageResourceId)
-            binding.quantityButtons.quantityNumber.text = storeItem.itemQuantity.toString()
-            binding.quantityButtons.increaseQuantity.setOnClickListener {
-                onIncrease(storeItem)
-            }
-            binding.quantityButtons.decreaseQuantity.setOnClickListener{
-                onDecrease(storeItem)
+            binding.addToCart.setOnClickListener{
+                    onIncrease(storeItem)
             }
         }
         override fun toString(): String {

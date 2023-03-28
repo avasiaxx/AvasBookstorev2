@@ -3,11 +3,13 @@ package com.example.storeapp.store
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
+import com.example.storeapp.cart.CartViewModel
 import com.example.storeapp.databinding.FragmentStoreListBinding
 
 /**
@@ -58,8 +60,8 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         super.onViewCreated(view, savedInstanceState)
         //Binding the fragment class binding
         _binding = FragmentStoreListBinding.bind(view)
-        adapter = StoreAdapter(storeViewModel::increaseQuantity,
-            storeViewModel::decreaseQuantity)
+        adapter = StoreAdapter(storeViewModel::onIncrease,
+            storeViewModel::onDecrease)
         binding.recyclerView.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)

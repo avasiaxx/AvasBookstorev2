@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
-class StoreItem(
+data class StoreItem(
     val itemName: String,
     @DrawableRes
     val imageResourceId: Int,
-    val itemDescription: String
+    val itemDescription: String,
+    var itemQuantity: Int
 ) {
     companion object{
         fun testData(
@@ -16,10 +17,12 @@ class StoreItem(
             @StringRes itemNameId: Int,
             @DrawableRes imageResourceId: Int,
             @StringRes itemDescriptionId: Int,
+            itemQuantity: Int
         ) = StoreItem(
             itemName = context.getString(itemNameId),
             imageResourceId = imageResourceId,
-            itemDescription = context.getString(itemDescriptionId)
+            itemDescription = context.getString(itemDescriptionId),
+            itemQuantity = 0
             )
     }
 }

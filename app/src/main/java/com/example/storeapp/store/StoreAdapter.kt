@@ -54,6 +54,7 @@ class StoreAdapter(
             binding.itemTitle.text = storeItem.itemName
             binding.itemDescription.text = storeItem.itemDescription
             binding.itemImage.setImageResource(storeItem.imageResourceId)
+            binding.quantityButtons.quantityNumber.text = storeItem.itemQuantity.toString()
             binding.quantityButtons.increaseQuantity.setOnClickListener {
                 onIncrease(storeItem)
             }
@@ -65,5 +66,4 @@ class StoreAdapter(
             return super.toString()
         }
     }
-
 }

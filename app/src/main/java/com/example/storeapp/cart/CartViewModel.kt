@@ -12,15 +12,17 @@ class CartViewModel: ViewModel() {
     val items: MutableLiveData<List<CartItem>?>
         get() = _currentCart
 
-    fun onIncrease(storeItem: StoreItem) {
+    fun onIncrease(storeItem: StoreItem): Boolean {
             val items = _currentCart.value?.toMutableList()
             val item = items?.firstOrNull { it.storeItem.itemName == storeItem.itemName }
 
             if (item == null) {
                 val cartItem: CartItem = CartItem(storeItem, 1)
                 items?.add(cartItem)
+                _currentCart.value = items
+                return false
             }
-        _currentCart.value = items
+        return true
     }
 //
 //    fun onDecrease(storeItem: StoreItem){

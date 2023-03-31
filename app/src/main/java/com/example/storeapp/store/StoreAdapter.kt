@@ -1,19 +1,27 @@
 package com.example.storeapp.store
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.storeapp.R
 import com.example.storeapp.cart.CartItem
 import com.example.storeapp.cart.CartViewModel
 import com.example.storeapp.databinding.FragmentStoreItemBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 /**
  * [RecyclerView.Adapter] that can display a [StoreItem].
  */
 class StoreAdapter(
-    private val onIncrease: (StoreItem) -> Unit
+    private val onIncrease: (StoreItem) -> Boolean
 ) : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
 
     private val values = mutableListOf<StoreItem>()
@@ -53,7 +61,20 @@ class StoreAdapter(
             binding.itemDescription.text = storeItem.itemDescription
             binding.itemImage.setImageResource(storeItem.imageResourceId)
             binding.addToCart.setOnClickListener{
-                    onIncrease(storeItem)
+                val suffix = if(onIncrease(storeItem)){
+                    "already exists in cart"
+                }else{
+                    "added to cart"
+                }
+                val spannable = SpannableStringBuilder("${storeItem.itemName} $suffix")
+                spannable.setSpan(ForegroundColorSpan(binding.root.context.getColor(R.color.teal_700)),
+                    0, storeItem.itemName.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannable.setSpan(StyleSpan(Typeface.BOLD), 0, storeItem.itemName.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                Snackbar.make(binding.root, spannable, Snackbar.LENGTH_SHORT).
+                setAction("Close"){}
+                    .show()
             }
         }
         override fun toString(): String {

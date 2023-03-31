@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.cart.CartViewModel
 import com.example.storeapp.databinding.FragmentStoreListBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A fragment representing a list of Items.
@@ -80,13 +81,10 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         super.onDestroy()
         _binding = null
     }
-
     companion object {
 
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
             StoreFragment().apply {

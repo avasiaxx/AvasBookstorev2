@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.databinding.CartItemBinding
 import com.example.storeapp.store.StoreItem
 
-class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>(){
+class CartAdapter(
+    private val removeFromCart: (CartItem) -> Unit
+): RecyclerView.Adapter<CartAdapter.ViewHolder>(){
 
     private val values = mutableListOf<CartItem>()
 
@@ -46,6 +48,9 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>(){
             binding.itemImage.setImageResource(cartItem.storeItem.imageResourceId)
             binding.itemName.text = cartItem.storeItem.itemName
             binding.quantityNumber.text = cartItem.quantity.toString()
+            binding.removeItem.setOnClickListener{
+                removeFromCart(cartItem)
+            }
         }
     }
 }

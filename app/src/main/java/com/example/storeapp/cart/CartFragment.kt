@@ -33,7 +33,7 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         super.onViewCreated(view, savedInstanceState)
         //Binding the fragment class binding
         _binding = FragmentCartListBinding.bind(view)
-        adapter = CartAdapter()
+        adapter = CartAdapter(cartViewModel::removeFromCart)
         binding.recyclerView.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)

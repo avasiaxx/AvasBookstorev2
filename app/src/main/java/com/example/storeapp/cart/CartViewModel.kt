@@ -38,4 +38,10 @@ class CartViewModel: ViewModel() {
 //        }
 //        _items.value = items
 //    }
+
+    fun removeFromCart(cartItem: CartItem){
+        val items = _currentCart.value?.toMutableList() ?: return
+        items.remove(cartItem)
+        _currentCart.value = items
+    }
 }

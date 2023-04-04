@@ -27,6 +27,7 @@
             tools:text="Test Item Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@id/item_image"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="150dp"
@@ -42,7 +43,8 @@
             app:layout_constraintEnd_toEndOf="@+id/quantity_number"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/material_dynamic_neutral20"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/decrease_quantity"
@@ -87,7 +89,9 @@
             android:layout_height="wrap_content"
             android:text="@string/_0_00"
             app:layout_constraintTop_toBottomOf="@id/quantity_number"
-            app:layout_constraintEnd_toEndOf="@id/quantity_number"/>
+            app:layout_constraintStart_toStartOf="@id/quantity_number"
+            app:layout_constraintEnd_toEndOf="@+id/quantity_number"
+            android:textColor="@color/material_dynamic_neutral20"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/remove_item"

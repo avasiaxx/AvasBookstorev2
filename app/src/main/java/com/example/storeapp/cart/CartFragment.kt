@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentCartListBinding
+import com.example.storeapp.shared.Util.formatCurrency
 import com.example.storeapp.store.StoreFragment
 
 class CartFragment: Fragment(R.layout.fragment_cart_list) {
@@ -33,7 +34,8 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         super.onViewCreated(view, savedInstanceState)
         //Binding the fragment class binding
         _binding = FragmentCartListBinding.bind(view)
-        adapter = CartAdapter(cartViewModel::removeFromCart)
+        adapter = CartAdapter(cartViewModel::removeFromCart, cartViewModel::onIncrease,
+        cartViewModel::onDecrease)
         binding.recyclerView.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)
@@ -43,6 +45,15 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         }
         cartViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
+        }
+        cartViewModel.subTotal.observe(viewLifecycleOwner){
+            binding.subtotal.text = getString(R.string.subtotal, it.formatCurrency())
+        }
+        cartViewModel.Tax.observe(viewLifecycleOwner){
+            binding.tax.text = getString(R.string.tax_13, it.formatCurrency())
+        }
+        cartViewModel.totalPrice.observe(viewLifecycleOwner){
+            binding.total.text = getString(R.string.total, it.formatCurrency())
         }
     }
     override fun onDestroy() {

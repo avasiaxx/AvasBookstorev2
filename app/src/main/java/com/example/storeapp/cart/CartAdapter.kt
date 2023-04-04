@@ -1,5 +1,7 @@
 package com.example.storeapp.cart
 
+import android.icu.text.NumberFormat
+import android.icu.util.Currency
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +9,9 @@ import com.example.storeapp.databinding.CartItemBinding
 import com.example.storeapp.store.StoreItem
 
 class CartAdapter(
-    private val removeFromCart: (CartItem) -> Unit
+    private val removeFromCart: (CartItem) -> Unit,
+    private val onIncrease: (CartItem) -> Unit,
+    private val onDecrease: (CartItem) -> Unit
 ): RecyclerView.Adapter<CartAdapter.ViewHolder>(){
 
     private val values = mutableListOf<CartItem>()
@@ -51,6 +55,17 @@ class CartAdapter(
             binding.removeItem.setOnClickListener{
                 removeFromCart(cartItem)
             }
+            binding.increaseQuantity.setOnClickListener{
+                onIncrease(cartItem)
+            }
+            binding.decreaseQuantity.setOnClickListener{
+                onDecrease(cartItem)
+            }
+            val format: NumberFormat = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 4
+            format.currency = Currency.getInstance("CAD")
+            val formattedNumber: String = format.format(cartItem.storeItem.itemPrice)
+            binding.itemPrice.text = formattedNumber
         }
     }
 }

@@ -6,6 +6,7 @@ data class CartItem(
     var storeItem: StoreItem,
     var quantity: Int
 ) {
+
     fun createCart(
         storeItem: StoreItem
     ){

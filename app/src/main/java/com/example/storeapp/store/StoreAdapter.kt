@@ -1,27 +1,28 @@
 package com.example.storeapp.store
 
-import android.graphics.Color
 import android.graphics.Typeface
+import android.icu.text.NumberFormat
+import android.icu.util.Currency
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
 import com.example.storeapp.cart.CartItem
-import com.example.storeapp.cart.CartViewModel
 import com.example.storeapp.databinding.FragmentStoreItemBinding
 import com.google.android.material.snackbar.Snackbar
+import com.example.storeapp.shared.Util
+import com.example.storeapp.shared.Util.formatCurrency
 
 
 /**
  * [RecyclerView.Adapter] that can display a [StoreItem].
  */
 class StoreAdapter(
-    private val onIncrease: (StoreItem) -> Boolean
+    private val onIncrease: (CartItem) -> Unit
 ) : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
 
     private val values = mutableListOf<StoreItem>()
@@ -60,19 +61,18 @@ class StoreAdapter(
             binding.itemTitle.text = storeItem.itemName
             binding.itemDescription.text = storeItem.itemDescription
             binding.itemImage.setImageResource(storeItem.imageResourceId)
+            binding.itemPrice.text = storeItem.itemPrice.formatCurrency()
             binding.addToCart.setOnClickListener{
-                val suffix = if(onIncrease(storeItem)){
-                    "already exists in cart"
-                }else{
-                    "added to cart"
-                }
+                val cartItem: CartItem = CartItem(storeItem, 1)
+                onIncrease(cartItem)
+                val suffix = "added to cart"
                 val spannable = SpannableStringBuilder("${storeItem.itemName} $suffix")
                 spannable.setSpan(ForegroundColorSpan(binding.root.context.getColor(R.color.teal_700)),
                     0, storeItem.itemName.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 spannable.setSpan(StyleSpan(Typeface.BOLD), 0, storeItem.itemName.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                Snackbar.make(binding.root, spannable, Snackbar.LENGTH_SHORT).
+                Snackbar.make(binding.root, spannable, 300).
                 setAction("Close"){}
                     .show()
             }

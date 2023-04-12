@@ -30,12 +30,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     navController.navigate(R.id.cartFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.account -> {
-                    //navController.navigate(R.id.accountFragment)
+                R.id.your_orders -> {
+                    navController.navigate(R.id.ordersFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.menu ->{
-                    //navController.navigate(R.id.settingsFragment)
+                R.id.account ->{
+                    navController.navigate(R.id.accountFragment)
                     return@setOnItemSelectedListener true
                 }
             }

@@ -11,13 +11,13 @@
         android:title="@string/your_cart"
         android:icon="@drawable/add_cart_icon"/>
     <item
+        android:id="@+id/your_orders"
+        android:enabled="true"
+        android:title="@string/your_orders"
+        android:icon="@drawable/your_orders_icon"/>
+    <item
         android:id="@+id/account"
         android:enabled="true"
         android:title="@string/your_account"
         android:icon="@drawable/account_button"/>
-    <item
-        android:id="@+id/menu"
-        android:enabled="true"
-        android:title="@string/menu"
-        android:icon="@drawable/menu_button"/>
 </menu>

@@ -64,7 +64,8 @@ class CartAdapter(
             val format: NumberFormat = NumberFormat.getCurrencyInstance()
             format.maximumFractionDigits = 4
             format.currency = Currency.getInstance("CAD")
-            val formattedNumber: String = format.format(cartItem.storeItem.itemPrice)
+            val formattedNumber: String = format.format(
+                cartItem.storeItem.itemPrice*cartItem.quantity)
             binding.itemPrice.text = formattedNumber
         }
     }

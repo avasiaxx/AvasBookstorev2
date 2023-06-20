@@ -62,6 +62,7 @@ class CartViewModel: ViewModel() {
         val items = _currentCart.value?.toMutableList() ?: return
         items.remove(cartItem)
         _currentCart.value = items
+        updatePrices()
     }
 
     private fun updatePrices() {

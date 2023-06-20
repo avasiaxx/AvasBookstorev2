@@ -1,4 +1,5 @@
 <resources>
+<!--    Test Data For Items-->
     <string name="app_name">Store App</string>
     <string name="item_1_name">Item Name 1</string>
     <string name="item_2_name">Item Name 2</string>
@@ -46,8 +47,6 @@
     <string name="decrease_quantity" />
     <string name="_0">0</string>
     <string name="increase_quantity">Increase Quantity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="quantity">Quantity</string>
     <string name="_0_00">$0.00</string>
     <string name="remove_from_cart">Remove From Cart</string>
@@ -56,15 +55,30 @@
     <string name="total">Total: %1s</string>
     <string name="subtotal">SubTotal: %1s</string>
     <string name="tax_13">Tax: %1s</string>
-    <string name="settings">Settings</string>
-    <string name="customer_service">Customer Service</string>
-    <string name="help_center">Help Center</string>
-    <string name="your_settings">Your Settings</string>
+
+
     <string name="delivery_time">Delivery Time:</string>
     <string name="shipping_to">Shipping To:</string>
     <string name="order">Order #:</string>
     <string name="your_orders">Your Orders</string>
+    <string name="option_icon">Option Icon</string>
+
+
+    <!--Setting Options-->
     <string name="login_security"><![CDATA[Login & Security]]></string>
-    <string name="manage_payment_information">Manage \nPayment Information</string>
+    <string name="manage_payment_information">Manage Payment Information</string>
     <string name="your_addresses">Your Addresses</string>
+    <string name="help_center">Help Center</string>
+    <string name="settings">Settings</string>
+    <string name = "contact_us">Contact Us</string>
+    <!--Setting Descriptions-->
+    <string name="login_security_description">Manage your password, email and mobile number</string>
+    <string name="manage_payment_information_description">Add or manage your payment information</string>
+    <string name="your_addresses_description">Add or manage your current addresses</string>
+    <string name="help_center_description">Browse assistance options</string>
+    <string name="settings_description">Control your app\'s settings like Dark Mode, etc</string>
+    <string name="contact_us_description">Contact us via Email if you have any questions or concerns</string>
+    <string name="cancel_items">Cancel Items</string>
+    <string name="orders">ORDERS</string>
+    <string name="item_image">Item Image</string>
 </resources>

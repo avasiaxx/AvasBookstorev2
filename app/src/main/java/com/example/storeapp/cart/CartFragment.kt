@@ -49,11 +49,14 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         cartViewModel.subTotal.observe(viewLifecycleOwner){
             binding.subtotal.text = getString(R.string.subtotal, it.formatCurrency())
         }
-        cartViewModel.Tax.observe(viewLifecycleOwner){
+        cartViewModel.tax.observe(viewLifecycleOwner){
             binding.tax.text = getString(R.string.tax_13, it.formatCurrency())
         }
         cartViewModel.totalPrice.observe(viewLifecycleOwner){
             binding.total.text = getString(R.string.total, it.formatCurrency())
+        }
+        binding.checkout.setOnClickListener(){
+
         }
     }
     override fun onDestroy() {

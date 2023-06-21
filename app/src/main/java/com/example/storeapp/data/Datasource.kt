@@ -4,6 +4,9 @@ import android.content.Context
 import com.example.storeapp.store.StoreItem
 import com.example.storeapp.R
 import com.example.storeapp.account.AccountItem
+import com.example.storeapp.cart.CartItem
+import com.example.storeapp.orders.OrderItem
+import kotlin.random.Random
 
 object Datasource {
 
@@ -24,6 +27,7 @@ object Datasource {
         )
     }
 
+    //TODO Code Clean up - Account Settings
     fun loadSettingOptions(
         context: Context
     ):
@@ -36,5 +40,15 @@ object Datasource {
                 AccountItem.getOptions(context, R.string.settings, R.drawable.settings_icon, R.string.settings_description),
                 AccountItem.getOptions(context, R.string.contact_us, R.drawable.contact_support_icon, R.string.contact_us_description)
             )
+    }
+
+    fun loadOrderTestData(
+        context: Context,
+        cartItem: CartItem,
+        total: Double
+    ): OrderItem {
+        val randOrderNum = Random.nextInt(10000,99999)
+        return OrderItem.getOrderData(context, R.string.delivery_date, total,
+            R.string.shipping_address, randOrderNum, cartItem)
     }
 }

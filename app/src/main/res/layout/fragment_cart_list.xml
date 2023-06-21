@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="180dp"
         app:cardBackgroundColor="@color/cardview_shadow_start_color"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,18 +1,10 @@
 package com.example.storeapp.account
 
-import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.storeapp.R
-import com.example.storeapp.databinding.YourAccountFragmentBinding
 import com.example.storeapp.databinding.YourAccountItemBinding
-import com.google.android.material.snackbar.Snackbar
 
 class AccountAdapter(): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 

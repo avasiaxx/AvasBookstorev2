@@ -3,7 +3,6 @@ package com.example.storeapp.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.storeapp.store.StoreItem
 
 class CartViewModel: ViewModel() {
 
@@ -17,13 +16,13 @@ class CartViewModel: ViewModel() {
         get() = _subTotal
 
     private val taxAmount: Double = .13
-    private val _Tax = MutableLiveData<Double>()
-    val Tax: LiveData<Double>
-        get() = _Tax
+    private val _tax = MutableLiveData<Double>()
+    val tax: LiveData<Double>
+        get() = _tax
 
-    private val _TotalPrice = MutableLiveData<Double>()
+    private val _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double>
-        get() = _TotalPrice
+        get() = _totalPrice
 
     fun onIncrease(cartItem: CartItem) {
             val items = _currentCart.value?.toMutableList()
@@ -67,7 +66,7 @@ class CartViewModel: ViewModel() {
 
     private fun updatePrices() {
         _subTotal.value = _currentCart.value?.sumOf { it.storeItem.itemPrice * it.quantity }
-        _Tax.value = taxAmount * _subTotal.value!!
-        _TotalPrice.value = _Tax.value?.let { _subTotal.value?.plus(it) }
+        _tax.value = taxAmount * _subTotal.value!!
+        _totalPrice.value = _tax.value?.let { _subTotal.value?.plus(it) }
     }
 }

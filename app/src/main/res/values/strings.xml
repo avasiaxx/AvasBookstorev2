@@ -29,6 +29,19 @@
     <string name="item_description_8">Colors bounced around in her head. [8]</string>
     <string name="item_description_9">They mixed and threaded themselves together. [9]</string>
     <string name="item_description_10">Even colors that had no business being together.  [10]</string>
+
+
+    <!--Test Data For Users-->
+    <string name="shipping_address">439 Port Washington Road. Milk River, Alberta,
+        Canada T0K 1M0</string>
+    <string name="card_type">VISA</string>
+    <string name="credit_card_number">4556794324866100</string>
+    <string name="exp_date">11/2027</string>
+    <string name='ccv'>588</string>
+    <string name='delivery_date'>June 22 2023</string>
+
+
+
     <string name="add_to_cart">Add To Cart</string>
     <string name="price_0">Price: $0</string>
     <string name="search">Search</string>

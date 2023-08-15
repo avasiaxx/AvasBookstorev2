@@ -9,7 +9,8 @@ data class StoreItem(
     @DrawableRes
     val imageResourceId: Int,
     val itemDescription: String,
-    val itemPrice: Double
+    val itemPrice: Double,
+    val storeID: Int
 ) {
     companion object{
         fun testData(
@@ -17,12 +18,14 @@ data class StoreItem(
             @StringRes itemNameId: Int,
             @DrawableRes imageResourceId: Int,
             @StringRes itemDescriptionId: Int,
-            itemPrice: Double
+            itemPrice: Double,
+            storeID: Int
         ) = StoreItem(
             itemName = context.getString(itemNameId),
             imageResourceId = imageResourceId,
             itemDescription = context.getString(itemDescriptionId),
-            itemPrice = itemPrice
+            itemPrice = itemPrice,
+            storeID = storeID
             )
     }
 }

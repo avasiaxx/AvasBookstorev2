@@ -4,7 +4,8 @@ import com.example.storeapp.store.StoreItem
 
 data class CartItem(
     var storeItem: StoreItem,
-    var quantity: Int
+    var quantity: Int,
+    var storeID: Int
 ) {
 
     fun createCart(

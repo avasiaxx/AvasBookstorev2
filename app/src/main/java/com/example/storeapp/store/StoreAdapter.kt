@@ -63,7 +63,7 @@ class StoreAdapter(
             binding.itemImage.setImageResource(storeItem.imageResourceId)
             binding.itemPrice.text = storeItem.itemPrice.formatCurrency()
             binding.addToCart.setOnClickListener{
-                val cartItem: CartItem = CartItem(storeItem, 1)
+                val cartItem: CartItem = CartItem(storeItem, 1, 1)
                 onIncrease(cartItem)
                 val suffix = "added to cart"
                 val spannable = SpannableStringBuilder("${storeItem.itemName} $suffix")

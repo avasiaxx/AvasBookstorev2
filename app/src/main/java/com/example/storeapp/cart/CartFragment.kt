@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentCartListBinding
 import com.example.storeapp.shared.Util.formatCurrency
 import com.example.storeapp.store.StoreFragment
+
 
 class CartFragment: Fragment(R.layout.fragment_cart_list) {
 
@@ -56,7 +58,8 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
             binding.total.text = getString(R.string.total, it.formatCurrency())
         }
         binding.checkout.setOnClickListener(){
-
+            val navController = findNavController(view)
+            navController.navigate(R.id.ordersFragment)
         }
     }
     override fun onDestroy() {

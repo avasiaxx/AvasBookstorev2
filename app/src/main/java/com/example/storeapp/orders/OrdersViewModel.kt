@@ -1,10 +1,14 @@
 package com.example.storeapp.orders
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.example.storeapp.cart.CartItem
 
-class OrdersViewModel {
-    private lateinit var orderList: List<OrderItem>
-    private val _currentCart = MutableLiveData<List<OrderItem>?>(emptyList())
+class OrdersViewModel: ViewModel() {
 
+    private lateinit var  orders: List<Any>
+    fun newOrder(cartItem: CartItem, orderHeader: OrderHeader){
 
+    }
 }

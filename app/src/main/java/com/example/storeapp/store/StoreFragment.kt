@@ -3,7 +3,6 @@ package com.example.storeapp.store
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -12,12 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.cart.CartViewModel
 import com.example.storeapp.databinding.FragmentStoreListBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.storeapp.domain.CurrencyFormatter
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A fragment representing a list of Items.
  */
+@AndroidEntryPoint
 class StoreFragment : Fragment(R.layout.fragment_store_list) {
+    @Inject
+    lateinit var currencyFormatter: CurrencyFormatter
 
     private var columnCount = 2
 
@@ -38,6 +42,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.options_menu, menu)
 
@@ -64,7 +69,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         super.onViewCreated(view, savedInstanceState)
         //Binding the fragment class binding
         _binding = FragmentStoreListBinding.bind(view)
-        adapter = StoreAdapter(cartViewModel::onIncrease)
+        adapter = StoreAdapter(cartViewModel::onIncrease, currencyFormatter)
         binding.recyclerView.apply {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)
@@ -82,15 +87,6 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         _binding = null
     }
     companion object {
-
         const val ARG_COLUMN_COUNT = "column-count"
-
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            StoreFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
     }
 }

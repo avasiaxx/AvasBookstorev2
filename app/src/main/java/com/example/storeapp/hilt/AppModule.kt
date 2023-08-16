@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 interface AppModule {
 
     companion object{
-        const val BASEURL = "https://ovd.app:5796"
+        private const val BASEURL = "https://ovd.app:5796"
         @Provides
         fun provideApiInterface(): ApiInterface {
             val gson = GsonBuilder()

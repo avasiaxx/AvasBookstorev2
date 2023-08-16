@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.storeapp.data.Datasource
+import com.example.storeapp.data.TestDatasource
 
 class StoreViewModel : ViewModel(){
 
@@ -14,7 +14,7 @@ class StoreViewModel : ViewModel(){
         get() = _items
 
     fun init(context: Context) {
-        originalItems = Datasource.loadStoreItems(context)
+        originalItems = TestDatasource.loadStoreItems(context)
         _items.value = originalItems
     }
 

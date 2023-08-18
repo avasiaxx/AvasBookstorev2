@@ -1,4 +1,3 @@
-package com.example.storeapp.store
 
 import android.graphics.Typeface
 import android.text.Spannable
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
 import com.example.storeapp.cart.CartItem
+import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.databinding.FragmentStoreItemBinding
 import com.example.storeapp.domain.CurrencyFormatter
 import com.google.android.material.snackbar.Snackbar
@@ -57,19 +57,19 @@ class StoreAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(storeItem: StoreItem){
-            binding.itemTitle.text = storeItem.itemName
-            binding.itemDescription.text = storeItem.itemDescription
-            binding.itemImage.setImageResource(storeItem.imageResourceId)
-            binding.itemPrice.text = currencyFormatter.formatCurrency(storeItem.itemPrice)
+            binding.itemTitle.text = storeItem.name
+            binding.itemDescription.text = storeItem.description
+            binding.itemImage.setImageResource(R.drawable.item1)
+            binding.itemPrice.text = currencyFormatter.formatCurrency(storeItem.cost)
             binding.addToCart.setOnClickListener{
                 val cartItem = CartItem(storeItem, 1, 1)
                 onIncrease(cartItem)
                 val suffix = "added to cart"
-                val spannable = SpannableStringBuilder("${storeItem.itemName} $suffix")
+                val spannable = SpannableStringBuilder("${storeItem.name} $suffix")
                 spannable.setSpan(ForegroundColorSpan(binding.root.context.getColor(R.color.teal_700)),
-                    0, storeItem.itemName.length,
+                    0, storeItem.name.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                spannable.setSpan(StyleSpan(Typeface.BOLD), 0, storeItem.itemName.length,
+                spannable.setSpan(StyleSpan(Typeface.BOLD), 0, storeItem.name.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 Snackbar.make(binding.root, spannable, 300).
                 setAction("Close"){}

@@ -7,6 +7,7 @@ import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.data.service.ApiInterface
 import com.example.storeapp.databinding.FragmentStoreItemBinding
+import com.example.storeapp.databinding.FragmentStoreListBinding
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -34,7 +35,7 @@ class NetworkDatasource @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun loadItems(binding: FragmentStoreItemBinding): List<StoreItem> {
+    override fun loadItems(binding: FragmentStoreListBinding): List<StoreItem> {
         val inventoryResponse = apiInterface.getInventory()
         var storeItems: List<StoreItem> = emptyList()
         if(inventoryResponse.isSuccessful && inventoryResponse.body() != null){

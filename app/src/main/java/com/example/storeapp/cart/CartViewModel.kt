@@ -26,7 +26,7 @@ class CartViewModel: ViewModel() {
 
     fun onIncrease(cartItem: CartItem) {
             val items = _currentCart.value?.toMutableList()
-            val item = items?.firstOrNull { it.storeItem.itemName == cartItem.storeItem.itemName }
+            val item = items?.firstOrNull { it.storeItem.name == cartItem.storeItem.name }
 
             if (item == null) {
                 items?.add(cartItem)
@@ -44,7 +44,7 @@ class CartViewModel: ViewModel() {
 
     fun onDecrease(cartItem: CartItem){
             val items = _currentCart.value?.toMutableList() ?: return
-            val item = items.firstOrNull { cartItem.storeItem.itemName == it.storeItem.itemName }
+            val item = items.firstOrNull { cartItem.storeItem.name == it.storeItem.name }
             val index = items.indexOf(item)
             items.remove(item)
         if (item != null && item.quantity > 1) {
@@ -65,7 +65,7 @@ class CartViewModel: ViewModel() {
     }
 
     private fun updatePrices() {
-        _subTotal.value = _currentCart.value?.sumOf { it.storeItem.itemPrice * it.quantity }
+        _subTotal.value = _currentCart.value?.sumOf { it.storeItem.cost * it.quantity }
         _tax.value = taxAmount * _subTotal.value!!
         _totalPrice.value = _tax.value?.let { _subTotal.value?.plus(it) }
     }

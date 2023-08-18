@@ -1,5 +1,6 @@
 package com.example.storeapp.store
 
+import StoreAdapter
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -77,7 +78,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
             }
             adapter = this@StoreFragment.adapter
         }
-        storeViewModel.init(requireContext())
+        storeViewModel.init(requireContext(), binding)
         storeViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }

@@ -1,16 +1,8 @@
 package com.example.storeapp.domain.repositories
 
-import com.example.storeapp.data.NetworkDatasource
-import com.example.storeapp.databinding.FragmentStoreItemBinding
-import javax.inject.Inject
+import com.example.storeapp.data.models.StoreItem
+import com.example.storeapp.databinding.FragmentStoreListBinding
 
-class InventoryRepository {
-    @Inject
-    lateinit var networkDatasource: NetworkDatasource
-
-    fun loadInventory(binding: FragmentStoreItemBinding){
-        var storeItems = networkDatasource.loadItems(binding)
-
-
-    }
+interface InventoryRepository {
+    fun loadInventory(binding: FragmentStoreListBinding): List <StoreItem>
 }

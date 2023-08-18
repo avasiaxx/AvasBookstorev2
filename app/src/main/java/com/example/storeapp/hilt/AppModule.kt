@@ -1,8 +1,12 @@
 package com.example.storeapp.hilt
 
+import com.example.storeapp.data.Datasource
+import com.example.storeapp.data.TestDatasource
 import com.example.storeapp.data.service.ApiInterface
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.CurrencyFormatterImpl
+import com.example.storeapp.domain.repositories.InventoryRepository
+import com.example.storeapp.domain.repositories.InventoryRepositoryImpl
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -13,7 +17,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
+@Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
 interface AppModule {
@@ -39,4 +43,10 @@ interface AppModule {
     }
     @Binds
     fun bindCurrencyFormatter(currencyFormatterImpl: CurrencyFormatterImpl): CurrencyFormatter
+
+    @Binds
+    fun bindDatasources(testDatasource: TestDatasource): Datasource
+
+    @Binds
+    fun bindInventoryRepository(inventoryRepositoryImpl: InventoryRepositoryImpl): InventoryRepository
 }

@@ -1,12 +1,11 @@
 package com.example.storeapp.data
 
-import android.content.Context
 import com.example.storeapp.data.models.Account
 import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.StoreItem
-import com.example.storeapp.databinding.FragmentStoreItemBinding
+import com.example.storeapp.databinding.FragmentStoreListBinding
 
 interface Datasource {
 
@@ -15,5 +14,5 @@ interface Datasource {
 
     fun loadOrders(): List<Order>
 
-    fun loadItems(binding: FragmentStoreItemBinding): List<StoreItem>
+    fun loadItems(binding: FragmentStoreListBinding): List<StoreItem>
 }

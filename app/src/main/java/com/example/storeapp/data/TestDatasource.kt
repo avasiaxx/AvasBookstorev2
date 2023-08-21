@@ -3,9 +3,9 @@ package com.example.storeapp.data
 import android.content.Context
 import com.example.storeapp.R
 import com.example.storeapp.account.AccountItem
-import com.example.storeapp.cart.CartItem
 import com.example.storeapp.data.models.Account
 import com.example.storeapp.data.models.Cart
+import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.StoreItem

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
-import com.example.storeapp.cart.CartItem
+import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.databinding.FragmentStoreItemBinding
 import com.example.storeapp.domain.CurrencyFormatter
@@ -62,7 +62,7 @@ class StoreAdapter(
             binding.itemImage.setImageResource(R.drawable.item1)
             binding.itemPrice.text = currencyFormatter.formatCurrency(storeItem.cost)
             binding.addToCart.setOnClickListener{
-                val cartItem = CartItem(storeItem, 1, 1)
+                val cartItem = CartItem(1, storeItem, 1)
                 onIncrease(cartItem)
                 val suffix = "added to cart"
                 val spannable = SpannableStringBuilder("${storeItem.name} $suffix")

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
-import com.example.storeapp.cart.CartItem
+import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.databinding.OrderItemFragmentBinding
 import com.example.storeapp.databinding.YourOrdersFragmentItemBinding
 import java.lang.IllegalStateException

@@ -1,11 +1,12 @@
-package com.example.storeapp.cart
 
+package com.example.storeapp.cart
 import android.icu.text.NumberFormat
 import android.icu.util.Currency
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
+import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.databinding.CartItemBinding
 
 class CartAdapter(

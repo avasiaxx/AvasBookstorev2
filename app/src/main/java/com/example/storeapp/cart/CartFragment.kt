@@ -1,9 +1,12 @@
 package com.example.storeapp.cart
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
@@ -34,6 +37,11 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Binding the fragment class binding
@@ -59,10 +67,10 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         cartViewModel.totalPrice.observe(viewLifecycleOwner){
             binding.total.text = getString(R.string.total, currencyFormatter.formatCurrency(it))
         }
-//        binding.checkout.setOnClickListener(){
-//            val navController = findNavController(view)
-//            navController.navigate(R.id.ordersFragment)
-//        }
+        binding.checkout.setOnClickListener(){
+            val navController = findNavController(view)
+            navController.navigate(R.id.checkOutFragment)
+        }
     }
     override fun onDestroy() {
         super.onDestroy()

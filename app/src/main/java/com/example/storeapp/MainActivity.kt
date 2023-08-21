@@ -1,8 +1,11 @@
 package com.example.storeapp
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 }
                 R.id.cart -> {
                     navController.navigate(R.id.cartFragment)
+                    Activity().title = "Your Cart"
                     return@setOnItemSelectedListener true
                 }
 //                R.id.your_orders -> {
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 //}
                 R.id.account ->{
                     navController.navigate(R.id.accountFragment)
+                    Activity().title = "Your Account"
                     return@setOnItemSelectedListener true
                 }
             }

@@ -2,6 +2,7 @@ package com.example.storeapp.account
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,6 +40,11 @@ class AccountFragment: Fragment(R.layout.your_account_fragment) {
         arguments?.let{
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

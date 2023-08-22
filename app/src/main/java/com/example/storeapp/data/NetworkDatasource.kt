@@ -4,9 +4,9 @@ import com.example.storeapp.data.models.Account
 import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
+import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.data.service.ApiInterface
-import com.example.storeapp.databinding.FragmentStoreItemBinding
 import com.example.storeapp.databinding.FragmentStoreListBinding
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
@@ -47,5 +47,9 @@ class NetworkDatasource @Inject constructor(
                 .show()
         }
         return storeItems
+    }
+
+    override fun loadPaymentInfo(): List<PaymentInfo> {
+        TODO("Not yet implemented")
     }
 }

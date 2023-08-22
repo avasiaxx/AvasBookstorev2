@@ -29,14 +29,16 @@
         app:layout_constraintTop_toBottomOf="@id/deliveryAddressTitle"
         app:layout_constraintStart_toStartOf="@id/deliveryAddressTitle"
         android:autofillHints="Delivery Address Input"
-        android:contentDescription="@string/delivery_address_input"
         tools:ignore="LabelFor" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="662dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="68dp" />
+        android:layout_width="370dp"
+        android:layout_height="452dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="67dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPostalAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,7 +83,7 @@
         android:id="@+id/checkOutFragment"
         android:name="com.example.storeapp.checkout.CheckOutFragment"
         android:label="Checkout"
-        tools:layout="@layout/fragment_check_out" >
+        tools:layout="@layout/fragment_checkout" >
         <action
             android:id="@+id/action_checkOutFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />

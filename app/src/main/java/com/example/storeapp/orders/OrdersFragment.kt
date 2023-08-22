@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.databinding.YourOrdersFragmentBinding
-import com.example.storeapp.store.StoreFragment
 
 class OrdersFragment: Fragment(R.layout.your_orders_fragment){
 

@@ -45,6 +45,7 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
         return inflater.inflate(R.layout.fragment_checkout, container, false)
     }
 
+    //Returning to home screen with back button
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){

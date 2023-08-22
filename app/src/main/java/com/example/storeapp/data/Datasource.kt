@@ -4,6 +4,7 @@ import com.example.storeapp.data.models.Account
 import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
+import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.databinding.FragmentStoreListBinding
 
@@ -15,4 +16,6 @@ interface Datasource {
     fun loadOrders(): List<Order>
 
     fun loadItems(binding: FragmentStoreListBinding): List<StoreItem>
+
+    fun loadPaymentInfo(): List<PaymentInfo>
 }

@@ -1,6 +1,5 @@
 package com.example.storeapp.cart
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -67,7 +66,7 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         cartViewModel.totalPrice.observe(viewLifecycleOwner){
             binding.total.text = getString(R.string.total, currencyFormatter.formatCurrency(it))
         }
-        binding.checkout.setOnClickListener(){
+        binding.checkout.setOnClickListener {
             val navController = findNavController(view)
             navController.navigate(R.id.checkOutFragment)
         }

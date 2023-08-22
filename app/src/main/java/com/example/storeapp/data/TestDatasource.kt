@@ -8,6 +8,7 @@ import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
+import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.databinding.FragmentStoreListBinding
 import com.example.storeapp.orders.OrderHeader
@@ -28,6 +29,10 @@ class TestDatasource @Inject constructor(
             StoreItem(5, context.getString(R.string.item_5_name), context.getString(R.string.item_description_1), 1.99 ),
             StoreItem(6, context.getString(R.string.item_6_name), context.getString(R.string.item_description_1), 1.99 )
         )
+    }
+
+    override fun loadPaymentInfo(): List<PaymentInfo> {
+        TODO("Not yet implemented")
     }
 
 

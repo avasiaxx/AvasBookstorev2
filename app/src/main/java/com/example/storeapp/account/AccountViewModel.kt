@@ -6,11 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.storeapp.data.TestDatasource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
-    private var testDatasource: TestDatasource
+    private var testDatasource: TestDatasource,
 ): ViewModel() {
 
     private val _items = MutableLiveData<List<AccountItem>>(emptyList())
@@ -18,6 +19,6 @@ class AccountViewModel @Inject constructor(
         get() = _items
 
         fun init(context: Context) {
-           _items.value = testDatasource.loadSettingOptions(context)
+           _items.value = testDatasource.loadSettingOptions()
         }
 }

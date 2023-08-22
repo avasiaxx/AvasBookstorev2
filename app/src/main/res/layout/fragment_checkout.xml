@@ -5,38 +5,41 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <TextView
-        android:id="@+id/deliveryAddressTitle"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/delivery_address"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="250dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="110dp"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_margin="16dp"
+        android:hint="@string/delivery_address">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPostalAddress">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextTextPostalAddress"
+    <TextView
+        android:id="@+id/paymentOptions"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="104dp"
-        app:layout_constraintTop_toBottomOf="@id/deliveryAddressTitle"
-        app:layout_constraintStart_toStartOf="@id/deliveryAddressTitle"
-        android:autofillHints="Delivery Address Input"
-        tools:ignore="LabelFor" />
+        android:layout_height="wrap_content"
+        android:text="@string/payment_options"
+        app:layout_constraintTop_toBottomOf="@+id/textInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/material_dynamic_neutral30"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="370dp"
         android:layout_height="452dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="67dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPostalAddress"
+        app:layout_constraintTop_toBottomOf="@id/paymentOptions"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

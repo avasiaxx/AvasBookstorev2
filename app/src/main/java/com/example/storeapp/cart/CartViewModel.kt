@@ -7,7 +7,6 @@ import com.example.storeapp.data.models.CartItem
 
 class CartViewModel: ViewModel() {
 
-    private lateinit var originalCart: List<CartItem>
     private val _currentCart = MutableLiveData<List<CartItem>?>(emptyList())
     val items: LiveData<List<CartItem>?>
         get() = _currentCart

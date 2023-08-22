@@ -34,10 +34,15 @@
     <!--Test Data For Users-->
     <string name="shipping_address">439 Port Washington Road. Milk River, Alberta,
         Canada T0K 1M0</string>
-    <string name="card_type">VISA</string>
+
     <string name="credit_card_number">4556794324866100</string>
     <string name="exp_date">11/2027</string>
     <string name='ccv'>588</string>
+
+    <string name="credit_card_number2">7297337879533070</string>
+    <string name="exp_date2">12/2028</string>
+    <string name='ccv2'>612</string>
+
     <string name='delivery_date'>June 22 2023</string>
 
 
@@ -120,4 +125,9 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="delivery_address">Delivery Address</string>
     <string name="delivery_address_input">Delivery Address Input</string>
+    <string name="credit_card_number_text">Credit Card Number</string>
+    <string name="expires">Expires: %s</string>
+    <string name="cc_image">CC Image</string>
+    <string name="payment_options">Payment Options</string>
+    <string name="selected_payment_method">Selected Payment Method</string>
 </resources>

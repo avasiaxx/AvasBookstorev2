@@ -2,6 +2,7 @@ package com.example.storeapp.cart
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation.findNavController
@@ -9,12 +10,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentCartListBinding
-import com.example.storeapp.shared.Util.formatCurrency
-import com.example.storeapp.store.StoreFragment
+import com.example.storeapp.domain.CurrencyFormatter
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class CartFragment: Fragment(R.layout.fragment_cart_list) {
 
+    @Inject
+    lateinit var currencyFormatter: CurrencyFormatter
     private var columnCount = 1
 
     private var _binding: FragmentCartListBinding? = null
@@ -30,6 +34,11 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         arguments?.let{
             columnCount = it.getInt(ARG_COLUMN_COUNT)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,17 +58,17 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
             adapter.setItems(it)
         }
         cartViewModel.subTotal.observe(viewLifecycleOwner){
-            binding.subtotal.text = getString(R.string.subtotal, it.formatCurrency())
+            binding.subtotal.text = getString(R.string.subtotal, currencyFormatter.formatCurrency(it))
         }
         cartViewModel.tax.observe(viewLifecycleOwner){
-            binding.tax.text = getString(R.string.tax_13, it.formatCurrency())
+            binding.tax.text = getString(R.string.tax_13, currencyFormatter.formatCurrency(it))
         }
         cartViewModel.totalPrice.observe(viewLifecycleOwner){
-            binding.total.text = getString(R.string.total, it.formatCurrency())
+            binding.total.text = getString(R.string.total, currencyFormatter.formatCurrency(it))
         }
-        binding.checkout.setOnClickListener(){
+        binding.checkout.setOnClickListener {
             val navController = findNavController(view)
-            navController.navigate(R.id.ordersFragment)
+            navController.navigate(R.id.checkOutFragment)
         }
     }
     override fun onDestroy() {
@@ -70,12 +79,5 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
     companion object {
 
         const val ARG_COLUMN_COUNT = "column-count"
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            StoreFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
     }
 }

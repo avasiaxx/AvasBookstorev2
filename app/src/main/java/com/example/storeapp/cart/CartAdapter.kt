@@ -1,12 +1,13 @@
-package com.example.storeapp.cart
 
+package com.example.storeapp.cart
 import android.icu.text.NumberFormat
 import android.icu.util.Currency
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeapp.R
+import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.databinding.CartItemBinding
-import com.example.storeapp.store.StoreItem
 
 class CartAdapter(
     private val removeFromCart: (CartItem) -> Unit,
@@ -49,8 +50,8 @@ class CartAdapter(
         //Pass binding through view-holder constructor
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(cartItem: CartItem) {
-            binding.itemImage.setImageResource(cartItem.storeItem.imageResourceId)
-            binding.itemName.text = cartItem.storeItem.itemName
+            binding.itemImage.setImageResource(R.drawable.item1)
+            binding.itemName.text = cartItem.storeItem.name
             binding.quantityNumber.text = cartItem.quantity.toString()
             binding.removeItem.setOnClickListener{
                 removeFromCart(cartItem)
@@ -65,7 +66,7 @@ class CartAdapter(
             format.maximumFractionDigits = 4
             format.currency = Currency.getInstance("CAD")
             val formattedNumber: String = format.format(
-                cartItem.storeItem.itemPrice*cartItem.quantity)
+                cartItem.storeItem.cost*cartItem.quantity)
             binding.itemPrice.text = formattedNumber
         }
     }

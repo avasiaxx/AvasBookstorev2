@@ -1,6 +1,5 @@
 package com.example.storeapp.data.models
 
-import com.example.storeapp.data.models.Cart
 
 data class Order(
     val id: Int? = null,

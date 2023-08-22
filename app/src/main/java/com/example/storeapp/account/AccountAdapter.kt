@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.databinding.YourAccountItemBinding
 
-class AccountAdapter(): RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
+class AccountAdapter: RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
     private val values = mutableListOf<AccountItem>()
 

@@ -3,7 +3,8 @@ package com.example.storeapp.orders
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.storeapp.cart.CartItem
+import com.example.storeapp.R
+import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.databinding.OrderItemFragmentBinding
 import com.example.storeapp.databinding.YourOrdersFragmentItemBinding
 import java.lang.IllegalStateException
@@ -20,8 +21,8 @@ class OrdersAdapter(
         private val binding: OrderItemFragmentBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(cartItem: CartItem){
-            binding.itemImage.setImageResource(cartItem.storeItem.imageResourceId)
-            binding.itemName.text = cartItem.storeItem.itemName
+            binding.itemImage.setImageResource(R.drawable.item1)
+            binding.itemName.text = cartItem.storeItem.name
             binding.quantityNumber.text = cartItem.quantity.toString()
         }
     }

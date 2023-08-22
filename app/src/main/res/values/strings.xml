@@ -1,5 +1,5 @@
 <resources>
-<!--    Test Data For Items-->
+    <!--    Test Data For Items-->
     <string name="app_name">Store App</string>
     <string name="item_1_name">Item Name 1</string>
     <string name="item_2_name">Item Name 2</string>
@@ -21,9 +21,9 @@
         get through. [3]</string>
     <string name="item_description_4">There was something in the tree. [4]</string>
     <string name="item_description_5">Nothing seemed to move until the moment she began
-        to take her eyes off the tree. [65</string>
+        to take her eyes off the tree. [5]</string>
     <string name="item_description_6">The scratches or striations seen in the park rocks were caused
-        by these attached boulders. [6]6</string>
+        by these attached boulders. [6]</string>
     <string name="item_description_7">The ice sheet also plucked and rounded Burke Mountain
         into the shape it possesses today. [7]</string>
     <string name="item_description_8">Colors bounced around in her head. [8]</string>
@@ -34,12 +34,16 @@
     <!--Test Data For Users-->
     <string name="shipping_address">439 Port Washington Road. Milk River, Alberta,
         Canada T0K 1M0</string>
-    <string name="card_type">VISA</string>
+
     <string name="credit_card_number">4556794324866100</string>
     <string name="exp_date">11/2027</string>
     <string name='ccv'>588</string>
-    <string name='delivery_date'>June 22 2023</string>
 
+    <string name="credit_card_number2">7297337879533070</string>
+    <string name="exp_date2">12/2028</string>
+    <string name='ccv2'>612</string>
+
+    <string name='delivery_date'>June 22 2023</string>
 
 
     <string name="add_to_cart">Add To Cart</string>
@@ -83,7 +87,7 @@
     <string name="your_addresses">Your Addresses</string>
     <string name="help_center">Help Center</string>
     <string name="settings">Settings</string>
-    <string name = "contact_us">Contact Us</string>
+    <string name="contact_us">Contact Us</string>
     <!--Setting Descriptions-->
     <string name="login_security_description">Manage your password, email and mobile number</string>
     <string name="manage_payment_information_description">Add or manage your payment information</string>
@@ -94,4 +98,36 @@
     <string name="cancel_items">Cancel Items</string>
     <string name="orders">ORDERS</string>
     <string name="item_image">Item Image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="delivery_address_input">Delivery Address Input</string>
+    <string name="credit_card_number_text">Credit Card Number</string>
+    <string name="expires">Expires: %s</string>
+    <string name="cc_image">CC Image</string>
+    <string name="payment_options">Payment Options</string>
+    <string name="selected_payment_method">Selected Payment Method</string>
 </resources>

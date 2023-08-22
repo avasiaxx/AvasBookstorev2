@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -23,12 +25,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    def jv = JavaVersion.VERSION_17
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility jv
+        targetCompatibility jv
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = jv.toString()
     }
     buildFeatures {
         viewBinding true
@@ -36,6 +39,10 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     def nav_version = "2.7.0"
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -56,4 +63,7 @@ dependencies {
     //Gson
     implementation('com.squareup.retrofit2:converter-gson:2.9.0')
 
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
 }

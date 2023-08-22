@@ -2,7 +2,6 @@ package com.example.storeapp.orders
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.example.storeapp.cart.CartItem
 
 data class OrderHeader(
     var deliveryTime: String,

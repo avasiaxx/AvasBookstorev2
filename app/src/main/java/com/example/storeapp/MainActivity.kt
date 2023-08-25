@@ -3,6 +3,7 @@ package com.example.storeapp
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -41,6 +42,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 }
             }
             false
+        }
+        //Disable bottom navigation on checkout screen
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.checkOutFragment) {
+
+                bottomNavigationView.visibility = View.GONE
+            } else {
+
+                bottomNavigationView.visibility = View.VISIBLE
+            }
         }
     }
 }

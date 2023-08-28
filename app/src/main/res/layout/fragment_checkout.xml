@@ -43,5 +43,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/payment_selection_options"
+        app:backgroundTint="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:layout_margin="20dp"
+        app:icon="@drawable/baseline_edit_24"
+        app:iconTint="@color/white"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

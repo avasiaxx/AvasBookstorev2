@@ -2,15 +2,12 @@ package com.example.storeapp.checkout
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
 import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.databinding.PaymentItemBinding
 
-class CheckOutAdapter(): RecyclerView.Adapter<CheckOutAdapter.ViewHolder>() {
+class CheckOutAdapter: RecyclerView.Adapter<CheckOutAdapter.ViewHolder>() {
 
     private val values = mutableListOf<PaymentInfo>()
 

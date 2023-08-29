@@ -2,8 +2,10 @@ package com.example.storeapp.shared
 
 import android.graphics.*
 import android.graphics.drawable.ColorDrawable
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeapp.R
 
 /**
  * Adds the ability to swipe on an item in a recycler view to delete it.
@@ -68,6 +70,23 @@ class SwipeDeleteListener(
                 itemView.bottom
             )
             background.draw(c)
+
+            val deleteIcon = ContextCompat.getDrawable(recyclerView.context, R.drawable.baseline_delete_forever_24)
+            val intrinsicWidth = deleteIcon?.intrinsicWidth
+            val intrinsicHeight = deleteIcon?.intrinsicHeight
+
+            val itemHeight = itemView.bottom - itemView.top
+            // Calculate position of delete icon
+            val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight!!) / 2
+            val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
+            val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth!!
+            val deleteIconRight = itemView.right - deleteIconMargin
+            val deleteIconBottom = deleteIconTop + intrinsicHeight
+
+            // Draw the delete icon
+            deleteIcon.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+            deleteIcon.draw(c)
+
         }
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }

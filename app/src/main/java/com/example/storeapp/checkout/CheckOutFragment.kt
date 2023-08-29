@@ -1,14 +1,14 @@
 package com.example.storeapp.checkout
 
+import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +16,7 @@ import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentCheckoutBinding
 import com.example.storeapp.shared.addSwipeDeleteListener
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.notify
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,8 +76,22 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
             }
             adapter = this@CheckOutFragment.adapter
             addSwipeDeleteListener {  position ->
-                checkoutViewModel.deletePosition(position)
-                this@CheckOutFragment.adapter.notifyItemRemoved(position)
+                AlertDialog.Builder(context)
+                    .setTitle("Delete Payment Method")
+                    .setMessage("Are you sure you want to delete this payment method?")
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton(android.R.string.ok
+                    ) { _, _ ->
+                        checkoutViewModel.deletePosition(position)
+                        this@CheckOutFragment.adapter.notifyItemRemoved(position)
+                        // Continue with delete operation
+                    } // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.cancel) { _, _ ->
+                        this@CheckOutFragment.adapter.notifyItemChanged(position)
+                    }
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
             }
         }
         checkoutViewModel.init()

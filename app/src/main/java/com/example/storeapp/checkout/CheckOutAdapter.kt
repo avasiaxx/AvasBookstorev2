@@ -39,7 +39,7 @@ class CheckOutAdapter: RecyclerView.Adapter<CheckOutAdapter.ViewHolder>() {
             }
         }
     }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             PaymentItemBinding.inflate(

@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentCheckoutBinding
+import com.example.storeapp.shared.addSwipeDeleteListener
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.notify
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +75,10 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
                 else -> GridLayoutManager(context, columnCount)
             }
             adapter = this@CheckOutFragment.adapter
+            addSwipeDeleteListener {  position ->
+                checkoutViewModel.deletePosition(position)
+                this@CheckOutFragment.adapter.notifyItemRemoved(position)
+            }
         }
         checkoutViewModel.init()
         checkoutViewModel.items.observe(viewLifecycleOwner){

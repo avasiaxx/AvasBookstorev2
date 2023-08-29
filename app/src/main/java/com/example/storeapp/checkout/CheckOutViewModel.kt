@@ -38,4 +38,10 @@ class CheckOutViewModel @Inject constructor(
             paymentMethod.card = replaced
         }
     }
+
+    fun deletePosition(position: Int){
+        val current = _currentPaymentMethods.value?.toMutableList()
+        current?.removeAt(position)
+        _currentPaymentMethods.value = current
+    }
 }

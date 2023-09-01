@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,8 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
+import com.example.storeapp.checkout.paymentmethod.PaymentMethodFragment
 import com.example.storeapp.databinding.FragmentCheckoutBinding
+import com.example.storeapp.databinding.FragmentPaymentMethodBinding
 import com.example.storeapp.shared.addSwipeDeleteListener
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -55,14 +59,7 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
     }
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_checkout, container, false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,6 +94,9 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
         checkoutViewModel.init()
         checkoutViewModel.items.observe(viewLifecycleOwner){
             adapter.setItems(it)
+        }
+        binding.add.setOnClickListener{
+            PaymentMethodFragment().show(parentFragmentManager, "SomeTagHere")
         }
     }
 

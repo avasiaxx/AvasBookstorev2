@@ -36,7 +36,7 @@ class TestDatasource @Inject constructor(
         return listOf(
             PaymentInfo(1, context.getString(R.string.credit_card_number),
                 context.getString(R.string.exp_date), context.getString(R.string.ccv).toInt()),
-            PaymentInfo(1, context.getString(R.string.credit_card_number2),
+            PaymentInfo(2, context.getString(R.string.credit_card_number2),
                 context.getString(R.string.exp_date2), context.getString(R.string.ccv2).toInt()),
         )
     }

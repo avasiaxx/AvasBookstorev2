@@ -5,5 +5,5 @@ data class PaymentInfo(
     val id: Int? = null,
     var card: String,
     val expiry: String,
-    val cvv: Int
+    val ccv: Int
 )

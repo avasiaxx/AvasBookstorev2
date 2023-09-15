@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import androidx.fragment.app.activityViewModels
 import com.example.storeapp.R
+import com.example.storeapp.checkout.CheckOutViewModel
 import com.example.storeapp.databinding.FragmentPaymentMethodBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -18,6 +20,9 @@ import java.util.TimeZone
 class PaymentMethodFragment() : BottomSheetDialogFragment(R.layout.fragment_payment_method) {
 
     private var selectedDate : Long = 0
+
+    private val checkoutViewModel: CheckOutViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentPaymentMethodBinding.bind(view)
@@ -54,9 +59,11 @@ class PaymentMethodFragment() : BottomSheetDialogFragment(R.layout.fragment_paym
             expDateTextInput.setText(simpleFormat.format(date))
         }
         binding.save.setOnClickListener{
+            val ccv: String = binding.ccvInput.text.toString()
+            checkoutViewModel.addNewPaymentMethod(3, binding.ccInput.text.toString(),
+                    expDateTextInput.text.toString(), ccv.toInt())
             dismiss()
         }
-
 
         expDateTextInput.onFocusChangeListener = OnFocusChangeListener { _, _ ->
                 datePicker.show(childFragmentManager, "DatePicker")

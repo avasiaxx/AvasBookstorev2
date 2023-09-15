@@ -44,4 +44,13 @@ class CheckOutViewModel @Inject constructor(
         current?.removeAt(position)
         _currentPaymentMethods.value = current
     }
+
+    fun addNewPaymentMethod(id: Int, card: String, expiry: String, ccv: Int){
+        val newPaymentOption: PaymentInfo = PaymentInfo(id, card, expiry, ccv)
+        val current = _currentPaymentMethods.value?.toMutableList()
+        current?.add(newPaymentOption)
+        paymentMethods = current?.toList()!!
+        convertToAsterisks()
+        _currentPaymentMethods.value = paymentMethods
+    }
 }

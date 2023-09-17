@@ -50,7 +50,7 @@
     <string name="price_0">Price: $0</string>
     <string name="search">Search</string>
     <string name="dropdown_menu">Dropdown Menu</string>
-    <string name="title1">title1</string>
+    <string name="title1">title!</string>
     <string name="title2">title2</string>
     <string name="header_title">Header Title</string>
     <string name="header_text">Header Text</string>
@@ -137,4 +137,5 @@
     <string name="save">Save</string>
     <string name="name">Name</string>
     <string name="mm_yyyy">mm/yyyy</string>
+    <string name="mm_yy">mm/yy</string>
 </resources>

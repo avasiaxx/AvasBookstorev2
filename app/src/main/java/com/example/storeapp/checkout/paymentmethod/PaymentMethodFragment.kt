@@ -85,7 +85,7 @@ class PaymentMethodFragment() : BottomSheetDialogFragment(R.layout.fragment_paym
             // Create a date format, then a date object with our offset
 
             // Create a date format, then a date object with our offset
-            val simpleFormat = SimpleDateFormat("MM/yyyy", Locale.CANADA)
+            val simpleFormat = SimpleDateFormat("MM/yy", Locale.CANADA)
             val date = Date(selectedDate + offsetFromUTC)
 
             expDateTextInput.setText(simpleFormat.format(date))

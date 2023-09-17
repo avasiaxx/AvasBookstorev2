@@ -27,8 +27,10 @@
                 app:layout_constraintTop_toBottomOf="@id/textView"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="16dp"
-                android:hint="@string/name">
+                android:hint="@string/name"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameInput"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPersonName">
@@ -42,7 +44,8 @@
                 app:layout_constraintTop_toBottomOf="@id/name"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="16dp"
-                android:hint="@string/credit_card_number_display_text">
+                android:hint="@string/credit_card_number_display_text"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -59,7 +62,8 @@
                 app:layout_constraintTop_toBottomOf="@id/creditCardNumber"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="16dp"
-                app:startIconDrawable="@drawable/baseline_edit_calendar_24">
+                app:startIconDrawable="@drawable/baseline_edit_calendar_24"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -71,13 +75,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ccv"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/ccDate"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="16dp"
                 android:hint="@string/ccv_display_text"
-                app:counterMaxLength="3">
+                app:counterMaxLength="3"
+                app:errorEnabled="true">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

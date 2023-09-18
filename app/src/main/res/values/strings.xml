@@ -139,4 +139,14 @@
     <string name="mm_yyyy">mm/yyyy</string>
     <string name="mm_yy">mm/yy</string>
     <string name="select">Select</string>
+    <string name="shipping_address2">Shipping Address: </string>
+    <string name="filler_address_text">Filler Address Text</string>
+    <string name="payment_method">Payment Method: </string>
+    <string name="filler_payment_info">Filler Payment Info</string>
+    <string name="change">Change</string>
+    <string name="finish_order">Finish Order</string>
+    <string name="items_total">Items Total:</string>
+    <string name="tax">Tax:</string>
+    <string name="order_total">Order Total:</string>
+    <string name="shipping">Shipping:</string>
 </resources>

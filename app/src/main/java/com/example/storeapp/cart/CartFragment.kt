@@ -68,7 +68,7 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         }
         binding.checkout.setOnClickListener {
             val navController = findNavController(view)
-            navController.navigate(R.id.checkOutFragment)
+            navController.navigate(R.id.paymentMethodFragment)
         }
     }
     override fun onDestroy() {

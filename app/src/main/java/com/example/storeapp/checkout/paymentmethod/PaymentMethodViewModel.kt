@@ -1,17 +1,15 @@
-package com.example.storeapp.checkout
+package com.example.storeapp.checkout.paymentmethod
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.storeapp.R
 import com.example.storeapp.data.Datasource
 import com.example.storeapp.data.models.PaymentInfo
-import com.example.storeapp.databinding.PaymentItemBinding
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 //Map a Display model for the selected item
 @HiltViewModel
-class CheckOutViewModel @Inject constructor(
+class PaymentMethodViewModel @Inject constructor(
     var datasource: Datasource
 ): ViewModel() {
     companion object {
@@ -33,7 +31,7 @@ class CheckOutViewModel @Inject constructor(
     private fun convertToAsterisks(){
         for(paymentMethod in paymentMethods){
             val ccNumber = paymentMethod.card
-            val replaced: String = ccNumber.replaceRange(0, Companion.MAX_CHARACTER_COUNT,
+            val replaced: String = ccNumber.replaceRange(0, MAX_CHARACTER_COUNT,
                 "*".repeat(MAX_CHARACTER_COUNT))
             paymentMethod.card = replaced
         }
@@ -46,7 +44,7 @@ class CheckOutViewModel @Inject constructor(
     }
 
     fun addNewPaymentMethod(id: Int, card: String, expiry: String, ccv: Int){
-        val newPaymentOption: PaymentInfo = PaymentInfo(id, card, expiry, ccv)
+        val newPaymentOption = PaymentInfo(id, card, expiry, ccv)
         val current = _currentPaymentMethods.value?.toMutableList()
         current?.add(newPaymentOption)
         paymentMethods = current?.toList()!!

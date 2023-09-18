@@ -8,7 +8,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
         //Disable bottom navigation on checkout screen
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.checkOutFragment) {
+            if(destination.id == R.id.paymentMethodFragment) {
 
                 bottomNavigationView.visibility = View.GONE
             } else {

@@ -1,4 +1,4 @@
-package com.example.storeapp.checkout
+package com.example.storeapp.checkout.paymentmethod
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import com.example.storeapp.R
 import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.databinding.PaymentItemBinding
 
-class CheckOutAdapter: RecyclerView.Adapter<CheckOutAdapter.ViewHolder>() {
+class PaymentMethodAdapter: RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder>() {
 
     private val values = mutableListOf<PaymentInfo>()
 

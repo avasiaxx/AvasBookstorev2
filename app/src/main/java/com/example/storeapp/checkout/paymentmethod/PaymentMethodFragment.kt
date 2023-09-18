@@ -1,153 +1,129 @@
 package com.example.storeapp.checkout.paymentmethod
 
-
+import android.app.AlertDialog
 import android.os.Bundle
-import android.text.InputFilter
+import android.view.MenuItem
 import android.view.View
-import android.view.View.OnFocusChangeListener
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
-import com.example.storeapp.checkout.CheckOutViewModel
-import com.example.storeapp.databinding.FragmentPaymentMethodBinding
-import com.example.storeapp.domain.ValidatorImpl
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.CompositeDateValidator
-import com.google.android.material.datepicker.DateValidatorPointBackward
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.TextInputEditText
+import com.example.storeapp.checkout.paymentmethod.bottomsheet.NewPaymentMethodBottomSheet
+import com.example.storeapp.databinding.FragmentPaymentmethodsBinding
+import com.example.storeapp.shared.addSwipeDeleteListener
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
-import java.util.TimeZone
-import javax.inject.Inject
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [PaymentMethodFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 
 @AndroidEntryPoint
-class PaymentMethodFragment() : BottomSheetDialogFragment(R.layout.fragment_payment_method) {
+class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
-    private var selectedDate : Long = 0
 
-    private val checkoutViewModel: CheckOutViewModel by activityViewModels()
+    // TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private val ARG_PARAM1 = "param1"
+    private val ARG_PARAM2 = "param2"
 
-    @Inject
-    lateinit var validator: ValidatorImpl
+    private var _binding: FragmentPaymentmethodsBinding? = null
+    private val binding
+        get() = _binding!!
+
+    private lateinit var adapter: PaymentMethodAdapter
+
+    private val checkoutViewModel: PaymentMethodViewModel by activityViewModels()
+
+    private var columnCount = 1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+        setHasOptionsMenu(true)
+    }
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentPaymentMethodBinding.bind(view)
-
-        //Sets Max Length Values for Text Input for CCV & CC
-        val ccvTextInput: TextInputEditText = view.findViewById(R.id.ccvInput)
-        val ccTextInput: TextInputEditText = view.findViewById(R.id.ccInput)
-        val expDateTextInput: TextInputEditText = view.findViewById(R.id.expDateInput)
-
-        val ccvMaxLength = 3
-        val ccMaxLength = 16
-        val dateMaxLength = 7
-        ccvTextInput.filters += InputFilter.LengthFilter(ccvMaxLength)
-        ccTextInput.filters += InputFilter.LengthFilter(ccMaxLength)
-        expDateTextInput.filters += InputFilter.LengthFilter(dateMaxLength)
-
-        //Create a list of composite date validators to confine between today's date & 5 years from now
-        val constraintsBuilder =
-            CalendarConstraints.Builder()
-                .setStart(getDate())
-                .setEnd(getDate5YearsFromNow())
-                .setValidator(
-                    CompositeDateValidator.allOf(
-                        listOf(
-                            DateValidatorPointForward.from(getDate()),
-                            DateValidatorPointBackward.before(getDate5YearsFromNow())
-                        )
-                    )
-                )
-
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .setCalendarConstraints(constraintsBuilder.build())
-                .build()
-
-
-        datePicker.addOnPositiveButtonClickListener {
-            selectedDate = datePicker.selection!!
-
-
-            val timeZoneUTC = TimeZone.getDefault()
-            val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
-
-            // Create a date format, then a date object with our offset
-
-            // Create a date format, then a date object with our offset
-            val simpleFormat = SimpleDateFormat("MM/yy", Locale.CANADA)
-            val date = Date(selectedDate + offsetFromUTC)
-
-            expDateTextInput.setText(simpleFormat.format(date))
-        }
-
-        expDateTextInput.onFocusChangeListener = OnFocusChangeListener { _, _ ->
-                datePicker.show(childFragmentManager, "DatePicker")
-        }
-        binding.expDateInput.isClickable = true
-        binding.expDateInput.setOnClickListener {
-            datePicker.show(childFragmentManager, "DatePicker")
-        }
-
-        //Saves new payment method & closes fragment
-        binding.save.setOnClickListener{
-            val ccv: String = binding.ccvInput.text.toString()
-            val cc: String = binding.ccInput.text.toString()
-            val expDate: String = expDateTextInput.text.toString()
-            val name: String = binding.nameInput.text.toString()
-            var valid = true
-
-            if(name.isEmpty()){
-                binding.name.error = "Please enter a valid name"
-                valid = false
+        _binding = FragmentPaymentmethodsBinding.bind(view)
+        adapter = PaymentMethodAdapter()
+        binding.recyclerView.apply {
+            layoutManager = when{
+                columnCount <= 1 -> LinearLayoutManager(context)
+                else -> GridLayoutManager(context, columnCount)
             }
-            if (!validator.checkCreditCard(cc) || cc.isEmpty()) {
-                binding.creditCardNumber.error = "Improper Credit Card Number"
-                valid = false
-                }
-            if (!validator.checkCCV(ccv) || ccv.isEmpty()) {
-                binding.ccv.error = "Improper CCV"
-                valid = false
-                }
-            if(valid){
-                createPaymentMethod(cc, expDate, ccv)
-                }
+            adapter = this@PaymentMethodFragment.adapter
+            addSwipeDeleteListener {  position ->
+                AlertDialog.Builder(context)
+                    .setTitle("Delete Payment Method")
+                    .setMessage("Are you sure you want to delete this payment method?")
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton(android.R.string.ok
+                    ) { _, _ ->
+                        checkoutViewModel.deletePosition(position)
+                        this@PaymentMethodFragment.adapter.notifyItemRemoved(position)
+                        // Continue with delete operation
+                    } // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.cancel) { _, _ ->
+                        this@PaymentMethodFragment.adapter.notifyItemChanged(position)
+                    }
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
             }
         }
-
-    private fun createPaymentMethod(
-        cc: String,
-        expDate: String,
-        ccv: String) {
-        checkoutViewModel.addNewPaymentMethod(3,
-            cc,
-            expDate,
-            ccv.toInt())
-        dismiss()
+        checkoutViewModel.init()
+        checkoutViewModel.items.observe(viewLifecycleOwner){
+            adapter.setItems(it)
+        }
+        binding.add.setOnClickListener{
+            NewPaymentMethodBottomSheet().show(parentFragmentManager, "SomeTagHere")
+        }
     }
 
-    private fun getDate5YearsFromNow(): Long {
-        val today = Instant.now().toEpochMilli()
-        val calendar = Calendar.getInstance(TimeZone.getDefault())
-        calendar.timeInMillis = today
-        calendar.add(Calendar.YEAR, 5)
-        return calendar.timeInMillis
+    //Returning to home screen with back button
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            android.R.id.home -> {
+                findNavController().popBackStack()
+                true
+            }
+            else -> { false }
+        }
     }
 
-    private fun getDate(): Long{
-        val today = Instant.now().toEpochMilli()
-        val calendar = Calendar.getInstance(TimeZone.getDefault())
-        calendar.timeInMillis = today
-        return calendar.timeInMillis
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment CheckOutFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            PaymentMethodFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
     }
 }

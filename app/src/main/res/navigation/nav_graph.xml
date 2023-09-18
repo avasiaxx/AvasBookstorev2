@@ -46,7 +46,7 @@
             app:exitAnim="@android:anim/fade_out"/>
         <action
             android:id="@+id/action_cartFragment_to_checkOutFragment"
-            app:destination="@id/checkOutFragment" />
+            app:destination="@id/paymentMethodFragment" />
 
     </fragment>
     <fragment
@@ -80,17 +80,17 @@
             app:exitAnim="@android:anim/fade_out"/>
     </fragment>
     <fragment
-        android:id="@+id/checkOutFragment"
-        android:name="com.example.storeapp.checkout.CheckOutFragment"
-        android:label="Checkout"
-        tools:layout="@layout/fragment_checkout" >
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.example.storeapp.checkout.paymentmethod.PaymentMethodFragment"
+        tools:layout="@layout/fragment_paymentmethods"
+        android:label="">
         <action
             android:id="@+id/action_checkOutFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
-        android:id="@+id/paymentMethodFragment"
-        android:name="com.example.storeapp.checkout.paymentmethod.PaymentMethodFragment"
+        android:id="@+id/newPaymentMethodFragment"
+        android:name="com.example.storeapp.checkout.paymentmethod.bottomsheet.NewPaymentMethodBottomSheet"
         android:label="fragment_payment_method"
-        tools:layout="@layout/fragment_payment_method" />
+        tools:layout="@layout/fragment_new_payment_method" />
 </navigation>

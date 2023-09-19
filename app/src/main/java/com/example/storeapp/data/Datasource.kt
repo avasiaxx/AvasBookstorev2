@@ -18,4 +18,6 @@ interface Datasource {
     fun loadItems(binding: FragmentStoreListBinding): List<StoreItem>
 
     fun loadPaymentInfo(): List<PaymentInfo>
+
+    fun getOrder(): Order
 }

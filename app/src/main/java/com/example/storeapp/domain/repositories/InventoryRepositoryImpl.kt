@@ -8,7 +8,12 @@ import javax.inject.Inject
 class InventoryRepositoryImpl @Inject constructor(
     private val datasource: Datasource
 ) : InventoryRepository {
+
+    private var inventory: MutableList<StoreItem> = mutableListOf()
     override fun loadInventory(binding: FragmentStoreListBinding): List<StoreItem> {
-        return datasource.loadItems(binding)
+        if(inventory.isEmpty()){
+            inventory.addAll(datasource.loadItems(binding))
+        }
+        return inventory
     }
 }

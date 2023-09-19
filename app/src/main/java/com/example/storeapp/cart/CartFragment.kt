@@ -9,13 +9,15 @@ import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
+import com.example.storeapp.checkout.CheckOutViewModel
 import com.example.storeapp.databinding.FragmentCartListBinding
 import com.example.storeapp.domain.CurrencyFormatter
+import com.example.storeapp.domain.repositories.CartRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CartFragment: Fragment(R.layout.fragment_cart_list) {
+class CartFragment : Fragment(R.layout.fragment_cart_list) {
 
     @Inject
     lateinit var currencyFormatter: CurrencyFormatter
@@ -69,6 +71,7 @@ class CartFragment: Fragment(R.layout.fragment_cart_list) {
         binding.checkout.setOnClickListener {
             val navController = findNavController(view)
             navController.navigate(R.id.checkOutFragment)
+            cartViewModel.createNewOrder()
         }
     }
     override fun onDestroy() {

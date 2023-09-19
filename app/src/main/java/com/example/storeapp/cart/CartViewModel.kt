@@ -3,9 +3,24 @@ package com.example.storeapp.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.CartItem
+import com.example.storeapp.domain.repositories.CartRepository
+import com.example.storeapp.domain.repositories.OrderRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
+import javax.inject.Inject
 
-class CartViewModel: ViewModel() {
+@HiltViewModel
+class CartViewModel @Inject constructor(
+    private var cartRepository: CartRepository,
+    private var orderRepository: OrderRepository
+): ViewModel() {
 
     private val _currentCart = MutableLiveData<List<CartItem>?>(emptyList())
     val items: LiveData<List<CartItem>?>
@@ -39,6 +54,7 @@ class CartViewModel: ViewModel() {
                 )
             }
         _currentCart.value = items
+        cartRepository.updateCart(items)
         updatePrices()
     }
 
@@ -54,6 +70,7 @@ class CartViewModel: ViewModel() {
             )
         }
         _currentCart.value = items
+        cartRepository.updateCart(items)
         updatePrices()
     }
 
@@ -61,6 +78,7 @@ class CartViewModel: ViewModel() {
         val items = _currentCart.value?.toMutableList() ?: return
         items.remove(cartItem)
         _currentCart.value = items
+        cartRepository.updateCart(items)
         updatePrices()
     }
 
@@ -68,5 +86,20 @@ class CartViewModel: ViewModel() {
         _subTotal.value = _currentCart.value?.sumOf { it.storeItem.cost * it.quantity }
         _tax.value = taxAmount * _subTotal.value!!
         _totalPrice.value = _tax.value?.let { _subTotal.value?.plus(it) }
+    }
+
+    fun createNewOrder(){
+        val timeZoneUTC = TimeZone.getDefault()
+        val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
+
+        val today = Instant.now().toEpochMilli()
+        val calendar = Calendar.getInstance(TimeZone.getDefault())
+        calendar.timeInMillis = today
+
+        val simpleFormat = SimpleDateFormat("mm/dd/yyyy", Locale.CANADA)
+        val date = Date(today + offsetFromUTC)
+
+        orderRepository.createOrder(1, cartRepository.loadCart(), simpleFormat.format(date),
+            _subTotal.value!!, _tax.value!!, _totalPrice.value!!)
     }
 }

@@ -52,4 +52,8 @@ class NetworkDatasource @Inject constructor(
     override fun loadPaymentInfo(): List<PaymentInfo> {
         TODO("Not yet implemented")
     }
+
+    override fun getOrder(): Order {
+        TODO("Not yet implemented")
+    }
 }

@@ -5,8 +5,12 @@ import com.example.storeapp.data.TestDatasource
 import com.example.storeapp.data.service.ApiInterface
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.CurrencyFormatterImpl
+import com.example.storeapp.domain.repositories.CartRepository
+import com.example.storeapp.domain.repositories.CartRepositoryImpl
 import com.example.storeapp.domain.repositories.InventoryRepository
 import com.example.storeapp.domain.repositories.InventoryRepositoryImpl
+import com.example.storeapp.domain.repositories.OrderRepository
+import com.example.storeapp.domain.repositories.OrderRepositoryImpl
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -45,8 +49,14 @@ interface AppModule {
     fun bindCurrencyFormatter(currencyFormatterImpl: CurrencyFormatterImpl): CurrencyFormatter
 
     @Binds
-    fun bindDatasources(testDatasource: TestDatasource): Datasource
+    fun bindDatasource(testDatasource: TestDatasource): Datasource
 
     @Binds
     fun bindInventoryRepository(inventoryRepositoryImpl: InventoryRepositoryImpl): InventoryRepository
+
+    @Binds
+    fun bindCartRepository(cartRepositoryImpl: CartRepositoryImpl): CartRepository
+
+    @Binds
+    fun bindOrderRepository(orderRepositoryImpl: OrderRepositoryImpl): OrderRepository
 }

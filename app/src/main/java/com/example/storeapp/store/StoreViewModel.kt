@@ -13,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StoreViewModel @Inject constructor(
-    var inventoryRepository: InventoryRepository,
-    var datasource: Datasource
+    private var inventoryRepository: InventoryRepository,
 ) : ViewModel(){
 
     private lateinit var originalItems: List<StoreItem>
@@ -23,8 +22,7 @@ class StoreViewModel @Inject constructor(
         get() = _items
 
     fun init(context: Context, binding: FragmentStoreListBinding) {
-        originalItems = datasource.loadItems(binding)
-        //originalItems = inventoryRepository.loadInventory(binding, context)
+        originalItems = inventoryRepository.loadInventory(binding)
         _items.value = originalItems
     }
 

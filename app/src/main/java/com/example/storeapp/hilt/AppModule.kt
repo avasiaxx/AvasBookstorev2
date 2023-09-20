@@ -21,6 +21,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
+
 @Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
@@ -51,12 +53,15 @@ interface AppModule {
     @Binds
     fun bindDatasource(testDatasource: TestDatasource): Datasource
 
+    @Singleton
     @Binds
     fun bindInventoryRepository(inventoryRepositoryImpl: InventoryRepositoryImpl): InventoryRepository
 
+    @Singleton
     @Binds
     fun bindCartRepository(cartRepositoryImpl: CartRepositoryImpl): CartRepository
 
+    @Singleton
     @Binds
     fun bindOrderRepository(orderRepositoryImpl: OrderRepositoryImpl): OrderRepository
 }

@@ -10,8 +10,9 @@ class OrderRepositoryImpl @Inject constructor(
 
     private lateinit var newOrder: Order
     override fun createOrder(id: Int?, cart:Cart, orderDate: String, subTotal: Double,
-                             taxAmount: Double, total: Double): Order {
+                             taxAmount: Double, total: Double) {
         newOrder = Order(id, cart, orderDate, subTotal, taxAmount, total)
-        return newOrder
     }
+
+    override fun loadOrder(): Order = newOrder
 }

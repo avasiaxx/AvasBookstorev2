@@ -9,10 +9,9 @@ import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
-import com.example.storeapp.checkout.CheckOutViewModel
 import com.example.storeapp.databinding.FragmentCartListBinding
 import com.example.storeapp.domain.CurrencyFormatter
-import com.example.storeapp.domain.repositories.CartRepository
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -69,9 +68,15 @@ class CartFragment : Fragment(R.layout.fragment_cart_list) {
             binding.total.text = getString(R.string.total, currencyFormatter.formatCurrency(it))
         }
         binding.checkout.setOnClickListener {
-            val navController = findNavController(view)
-            navController.navigate(R.id.checkOutFragment)
-            cartViewModel.createNewOrder()
+            if(cartViewModel.checkIfCartIsNotEmpty()){
+                val navController = findNavController(view)
+                navController.navigate(R.id.checkOutFragment)
+                cartViewModel.createNewOrder()
+            } else{
+                Snackbar.make(binding.root, "No Items In Cart", Snackbar.LENGTH_SHORT)
+                    .setAction("close"){}
+                    .show()
+            }
         }
     }
     override fun onDestroy() {

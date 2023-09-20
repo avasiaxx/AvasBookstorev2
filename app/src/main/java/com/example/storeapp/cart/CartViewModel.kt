@@ -3,7 +3,6 @@ package com.example.storeapp.cart
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.domain.repositories.CartRepository
 import com.example.storeapp.domain.repositories.OrderRepository
@@ -88,6 +87,9 @@ class CartViewModel @Inject constructor(
         _totalPrice.value = _tax.value?.let { _subTotal.value?.plus(it) }
     }
 
+    fun checkIfCartIsNotEmpty(): Boolean {
+        return _currentCart.value?.size!! > 0
+    }
     fun createNewOrder(){
         val timeZoneUTC = TimeZone.getDefault()
         val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1

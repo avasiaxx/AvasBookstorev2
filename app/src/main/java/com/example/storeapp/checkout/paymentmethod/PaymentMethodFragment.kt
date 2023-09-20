@@ -40,7 +40,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
 
     private lateinit var adapter: PaymentMethodAdapter
 
-    private val checkoutViewModel: PaymentMethodViewModel by activityViewModels()
+    private val paymentMethodViewModel: PaymentMethodViewModel by activityViewModels()
 
     private var columnCount = 1
 
@@ -75,7 +75,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
                     // The dialog is automatically dismissed when a dialog button is clicked.
                     .setPositiveButton(android.R.string.ok
                     ) { _, _ ->
-                        checkoutViewModel.deletePosition(position)
+                        paymentMethodViewModel.deletePosition(position)
                         this@PaymentMethodFragment.adapter.notifyItemRemoved(position)
                         // Continue with delete operation
                     } // A null listener allows the button to dismiss the dialog and take no further action.
@@ -86,8 +86,8 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
                     .show()
             }
         }
-        checkoutViewModel.init()
-        checkoutViewModel.items.observe(viewLifecycleOwner){
+        paymentMethodViewModel.init()
+        paymentMethodViewModel.items.observe(viewLifecycleOwner){
             adapter.setItems(it)
         }
         binding.add.setOnClickListener{

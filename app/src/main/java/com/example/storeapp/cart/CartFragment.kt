@@ -39,7 +39,7 @@ class CartFragment : Fragment(R.layout.fragment_cart_list) {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

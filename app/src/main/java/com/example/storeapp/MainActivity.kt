@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         //Disable bottom navigation on checkout/payment methods screens
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.newPaymentMethodFragment ||
-                destination.id == R.id.checkOutFragment) {
+                destination.id == R.id.checkOutFragment ||
+                destination.id == R.id.paymentMethodFragment) {
 
                 bottomNavigationView.visibility = View.GONE
             } else {

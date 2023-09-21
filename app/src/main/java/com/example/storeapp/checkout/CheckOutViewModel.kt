@@ -19,10 +19,9 @@ class CheckOutViewModel @Inject constructor(
     private lateinit var order: Order
 
     private lateinit var cartItems: List<CartItem>
-    private val _currentCartItems = MutableLiveData<List<CartItem>?>(emptyList())
+    private val _currentCartItems = MutableLiveData<List<CartItem>>(emptyList())
 
-    private val shippingCost = 2.99
-    val items: LiveData<List<CartItem>?> get() = _currentCartItems
+    val items: LiveData<List<CartItem>> get() = _currentCartItems
 
     fun init(){
         order = orderRepository.loadOrder()
@@ -34,7 +33,7 @@ class CheckOutViewModel @Inject constructor(
     }
 
     fun getFormattedShipping(): String{
-        return currencyFormatter.formatCurrency(shippingCost)
+        return currencyFormatter.formatCurrency(SHIPPING_COST)
     }
 
     fun getFormattedTax(): String{
@@ -42,7 +41,11 @@ class CheckOutViewModel @Inject constructor(
     }
 
     fun getFormattedTotal(): String{
-        val newTotal = order.total + shippingCost
+        val newTotal = order.total + SHIPPING_COST
         return currencyFormatter.formatCurrency(newTotal)
+    }
+
+    companion object {
+        private const val SHIPPING_COST = 2.99
     }
 }

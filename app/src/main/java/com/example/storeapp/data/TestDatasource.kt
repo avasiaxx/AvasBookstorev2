@@ -5,22 +5,18 @@ import com.example.storeapp.R
 import com.example.storeapp.account.AccountItem
 import com.example.storeapp.data.models.Account
 import com.example.storeapp.data.models.Cart
-import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.data.models.StoreItem
-import com.example.storeapp.databinding.FragmentStoreListBinding
-import com.example.storeapp.orders.OrderHeader
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import kotlin.random.Random
 
 class TestDatasource @Inject constructor(
     @ApplicationContext private val context: Context
 ): Datasource{
 
-    override fun loadItems(binding: FragmentStoreListBinding): List<StoreItem> {
+    override fun loadItems(): List<StoreItem> {
         return listOf(
             StoreItem(1, context.getString(R.string.item_1_name), context.getString(R.string.item_description_1), 1.99 ),
             StoreItem(2, context.getString(R.string.item_2_name), context.getString(R.string.item_description_1), 1.99 ),
@@ -56,16 +52,6 @@ class TestDatasource @Inject constructor(
                 AccountItem.getOptions(context, R.string.settings, R.drawable.settings_icon, R.string.settings_description),
                 AccountItem.getOptions(context, R.string.contact_us, R.drawable.contact_support_icon, R.string.contact_us_description)
             )
-    }
-
-    fun loadOrderTestData(
-        context: Context,
-        cartItem: CartItem,
-        total: Double
-    ): OrderHeader {
-        val randOrderNum = Random.nextInt(10000,99999)
-        return OrderHeader.getOrderData(context, R.string.delivery_date, total,
-            R.string.shipping_address, randOrderNum)
     }
 
     override fun loadAccount(login: Login): Account {

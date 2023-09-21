@@ -1,12 +1,9 @@
 package com.example.storeapp.store
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.storeapp.data.Datasource
 import com.example.storeapp.data.models.StoreItem
-import com.example.storeapp.databinding.FragmentStoreListBinding
 import com.example.storeapp.domain.repositories.InventoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,8 +18,8 @@ class StoreViewModel @Inject constructor(
     val items: LiveData<List<StoreItem>>
         get() = _items
 
-    fun init(context: Context, binding: FragmentStoreListBinding) {
-        originalItems = inventoryRepository.loadInventory(binding)
+    fun init() {
+        originalItems = inventoryRepository.loadInventory()
         _items.value = originalItems
     }
 

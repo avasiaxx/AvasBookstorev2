@@ -68,12 +68,12 @@ class CartFragment : Fragment(R.layout.fragment_cart_list) {
             binding.total.text = getString(R.string.total, currencyFormatter.formatCurrency(it))
         }
         binding.checkout.setOnClickListener {
-            if(cartViewModel.checkIfCartIsNotEmpty()){
+            if(!cartViewModel.checkIfCartIsEmpty()){
                 val navController = findNavController(view)
                 navController.navigate(R.id.checkOutFragment)
                 cartViewModel.createNewOrder()
             } else{
-                Snackbar.make(binding.root, "No Items In Cart", Snackbar.LENGTH_SHORT)
+                Snackbar.make(binding.root, "No Items In Cart", 300)
                     .setAction("close"){}
                     .show()
             }

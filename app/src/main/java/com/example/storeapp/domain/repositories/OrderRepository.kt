@@ -5,8 +5,14 @@ import com.example.storeapp.data.models.Order
 
 interface OrderRepository {
 
-    fun createOrder(id: Int?, cart: Cart, orderDate: String, subTotal: Double, taxAmount: Double,
-                    total: Double)
+    fun createOrder(
+        id: Int?,
+        cart: Cart,
+        orderDate: String,
+        subTotal: Double,
+        taxAmount: Double,
+        total: Double
+    )
 
     fun loadOrder(): Order
 }

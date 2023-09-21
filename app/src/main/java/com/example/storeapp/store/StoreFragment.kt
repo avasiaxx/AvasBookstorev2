@@ -24,8 +24,6 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
     @Inject
     lateinit var currencyFormatter: CurrencyFormatter
 
-    private var columnCount = 2
-
     private var _binding: FragmentStoreListBinding? = null
     private val binding
         get() = _binding!!
@@ -39,10 +37,12 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
+            COLUMN_COUNT = it.getInt(ARG_COLUMN_COUNT)
         }
     }
 
+
+    //TODO Code is not being used - need to loop back & implement this search view
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.options_menu, menu)
@@ -73,12 +73,12 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         adapter = StoreAdapter(cartViewModel::onIncrease, currencyFormatter)
         binding.recyclerView.apply {
             layoutManager = when {
-                columnCount <= 1 -> LinearLayoutManager(context)
-                else -> GridLayoutManager(context, columnCount)
+                COLUMN_COUNT <= 1 -> LinearLayoutManager(context)
+                else -> GridLayoutManager(context, COLUMN_COUNT)
             }
             adapter = this@StoreFragment.adapter
         }
-        storeViewModel.init(requireContext(), binding)
+        storeViewModel.init()
         storeViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
@@ -89,5 +89,6 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
     }
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"
+        private var COLUMN_COUNT = 2
     }
 }

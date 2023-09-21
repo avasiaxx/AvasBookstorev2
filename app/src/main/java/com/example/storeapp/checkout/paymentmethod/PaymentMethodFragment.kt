@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.checkout.paymentmethod.bottomsheet.NewPaymentMethodBottomSheet
@@ -42,8 +41,6 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
 
     private val paymentMethodViewModel: PaymentMethodViewModel by activityViewModels()
 
-    private var columnCount = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,10 +59,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
         _binding = FragmentPaymentmethodsBinding.bind(view)
         adapter = PaymentMethodAdapter()
         binding.recyclerView.apply {
-            layoutManager = when{
-                columnCount <= 1 -> LinearLayoutManager(context)
-                else -> GridLayoutManager(context, columnCount)
-            }
+            layoutManager = LinearLayoutManager(context)
             adapter = this@PaymentMethodFragment.adapter
             addSwipeDeleteListener {  position ->
                 AlertDialog.Builder(context)

@@ -12,7 +12,6 @@ import java.time.Instant
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import java.util.TimeZone
 import javax.inject.Inject
 
 @HiltViewModel
@@ -87,19 +86,16 @@ class CartViewModel @Inject constructor(
         _totalPrice.value = _tax.value?.let { _subTotal.value?.plus(it) }
     }
 
-    fun checkIfCartIsNotEmpty(): Boolean {
-        return _currentCart.value?.size!! > 0
+    fun checkIfCartIsEmpty(): Boolean {
+        return _currentCart.value.isNullOrEmpty()
     }
     fun createNewOrder(){
-        val timeZoneUTC = TimeZone.getDefault()
-        val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
-
         val today = Instant.now().toEpochMilli()
-        val calendar = Calendar.getInstance(TimeZone.getDefault())
+        val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.timeInMillis = today
 
         val simpleFormat = SimpleDateFormat("mm/dd/yyyy", Locale.CANADA)
-        val date = Date(today + offsetFromUTC)
+        val date = Date(today)
 
         orderRepository.createOrder(1, cartRepository.loadCart(), simpleFormat.format(date),
             _subTotal.value!!, _tax.value!!, _totalPrice.value!!)

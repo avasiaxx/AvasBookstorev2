@@ -12,13 +12,14 @@ import com.example.storeapp.databinding.CheckoutItemBinding
 class CheckOutAdapter: RecyclerView.Adapter<CheckOutAdapter.ViewHolder>(){
 
     private val values = mutableListOf<CartItem>()
+
     inner class ViewHolder(
         private val binding: CheckoutItemBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(cartItem: CartItem){
             binding.itemName.text = cartItem.storeItem.name
             val format: NumberFormat = NumberFormat.getCurrencyInstance()
-            format.maximumFractionDigits = 4
+            format.maximumFractionDigits = MAX_FRACTION_DIGITS
             format.currency = Currency.getInstance("CAD")
             val formattedNumber: String = format.format(
                 cartItem.storeItem.cost*cartItem.quantity)
@@ -52,5 +53,9 @@ class CheckOutAdapter: RecyclerView.Adapter<CheckOutAdapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.bind(item)
+    }
+
+    companion object {
+        private const val MAX_FRACTION_DIGITS = 2
     }
 }

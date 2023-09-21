@@ -47,9 +47,11 @@ interface AppModule {
                 .create(ApiInterface::class.java)
         }
     }
+
     @Binds
     fun bindCurrencyFormatter(currencyFormatterImpl: CurrencyFormatterImpl): CurrencyFormatter
 
+    @Singleton
     @Binds
     fun bindDatasource(testDatasource: TestDatasource): Datasource
 

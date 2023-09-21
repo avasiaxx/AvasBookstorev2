@@ -2,7 +2,6 @@ package com.example.storeapp.domain.repositories
 
 import com.example.storeapp.data.Datasource
 import com.example.storeapp.data.models.StoreItem
-import com.example.storeapp.databinding.FragmentStoreListBinding
 import javax.inject.Inject
 
 class InventoryRepositoryImpl @Inject constructor(
@@ -10,9 +9,9 @@ class InventoryRepositoryImpl @Inject constructor(
 ) : InventoryRepository {
 
     private var inventory: MutableList<StoreItem> = mutableListOf()
-    override fun loadInventory(binding: FragmentStoreListBinding): List<StoreItem> {
+    override fun loadInventory(): List<StoreItem> {
         if(inventory.isEmpty()){
-            inventory.addAll(datasource.loadItems(binding))
+            inventory.addAll(datasource.loadItems())
         }
         return inventory
     }

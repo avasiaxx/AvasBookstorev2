@@ -12,8 +12,6 @@
     <string name="item_9_name">Item Name 9</string>
     <string name="item_10_name">Item Name 10</string>
 
-    <string name="test_price">$0</string>
-
     <string name="test_description">Test Description</string>
     <string name="item_description_1">The headphones were on. [1]</string>
     <string name="item_description_2">They had been utilized on purpose. [2]</string>
@@ -31,10 +29,6 @@
     <string name="item_description_10">Even colors that had no business being together.  [10]</string>
 
 
-    <!--Test Data For Users-->
-    <string name="shipping_address">439 Port Washington Road. Milk River, Alberta,
-        Canada T0K 1M0</string>
-
     <string name="credit_card_number">4556794324866100</string>
     <string name="exp_date">11/2027</string>
     <string name='ccv'>588</string>
@@ -42,8 +36,6 @@
     <string name="credit_card_number2">7297337879533070</string>
     <string name="exp_date2">12/2028</string>
     <string name='ccv2'>612</string>
-
-    <string name='delivery_date'>June 22 2023</string>
 
 
     <string name="add_to_cart">Add To Cart</string>
@@ -98,8 +90,8 @@
     <string name="cancel_items">Cancel Items</string>
     <string name="orders">ORDERS</string>
     <string name="item_image">Item Image</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

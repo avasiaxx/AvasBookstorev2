@@ -41,13 +41,16 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
             adapter.setItems(it)
         }
         binding.itemsTotalDisplay.text = checkOutViewModel.getFormattedSubTotal()
-        binding.shippingToDisplay.text = checkOutViewModel.getFormattedShipping()
+        binding.shippingToDisplay.text = checkOutViewModel.getFormattedShippingCost()
         binding.taxAmountDisplay.text = checkOutViewModel.getFormattedTax()
         binding.orderTotalDisplay.text = checkOutViewModel.getFormattedTotal()
         binding.changeMethod.setOnClickListener {
             val navController = Navigation.findNavController(view)
             navController.navigate(R.id.paymentMethodFragment)
         }
+        binding.paymentMethodFiller.text =
+            checkOutViewModel.formatUserCC()
+        binding.address.text = checkOutViewModel.formatShippingAddress()
     }
 
     override fun onResume() {

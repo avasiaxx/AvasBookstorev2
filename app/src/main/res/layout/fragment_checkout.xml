@@ -175,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/filler_address_text"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@id/shippingTo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/shippingTo"
@@ -200,7 +200,7 @@
                 app:layout_constraintTop_toTopOf="@id/paymentMethod"
                 android:text="@string/filler_payment_info"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 android:textColor="@color/material_dynamic_neutral20"
                 android:paddingBottom="15dp"/>
 

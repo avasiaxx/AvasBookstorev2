@@ -3,14 +3,20 @@ package com.example.storeapp.hilt
 import com.example.storeapp.data.Datasource
 import com.example.storeapp.data.TestDatasource
 import com.example.storeapp.data.service.ApiInterface
+import com.example.storeapp.domain.AddressFormatter
+import com.example.storeapp.domain.CCAsterisksFormatter
+import com.example.storeapp.domain.CCAsterisksFormatterImpl
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.CurrencyFormatterImpl
+import com.example.storeapp.domain.AddressFormatterImpl
 import com.example.storeapp.domain.repositories.CartRepository
 import com.example.storeapp.domain.repositories.CartRepositoryImpl
 import com.example.storeapp.domain.repositories.InventoryRepository
 import com.example.storeapp.domain.repositories.InventoryRepositoryImpl
 import com.example.storeapp.domain.repositories.OrderRepository
 import com.example.storeapp.domain.repositories.OrderRepositoryImpl
+import com.example.storeapp.domain.repositories.UserRepository
+import com.example.storeapp.domain.repositories.UserRepositoryImpl
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -49,7 +55,12 @@ interface AppModule {
     }
 
     @Binds
+    fun bindAddressFormatter(addressFormatterImpl: AddressFormatterImpl): AddressFormatter
+    @Binds
     fun bindCurrencyFormatter(currencyFormatterImpl: CurrencyFormatterImpl): CurrencyFormatter
+
+    @Binds
+    fun bindCCAsterisksFormatter(ccAsterisksFormatterImpl: CCAsterisksFormatterImpl): CCAsterisksFormatter
 
     @Singleton
     @Binds
@@ -66,4 +77,8 @@ interface AppModule {
     @Singleton
     @Binds
     fun bindOrderRepository(orderRepositoryImpl: OrderRepositoryImpl): OrderRepository
+
+    @Singleton
+    @Binds
+    fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 }

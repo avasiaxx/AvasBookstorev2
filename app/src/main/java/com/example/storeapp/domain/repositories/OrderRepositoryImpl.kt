@@ -4,9 +4,7 @@ import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Order
 import javax.inject.Inject
 
-class OrderRepositoryImpl @Inject constructor(
-
-): OrderRepository {
+class OrderRepositoryImpl @Inject constructor(): OrderRepository {
 
     private lateinit var newOrder: Order
     override fun createOrder(
@@ -26,6 +24,5 @@ class OrderRepositoryImpl @Inject constructor(
             total
         )
     }
-
     override fun loadOrder(): Order = newOrder
 }

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
@@ -57,7 +58,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPaymentmethodsBinding.bind(view)
-        adapter = PaymentMethodAdapter()
+        adapter = PaymentMethodAdapter(paymentMethodViewModel::onPaymentMethodSelected)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@PaymentMethodFragment.adapter
@@ -86,6 +87,10 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
         }
         binding.add.setOnClickListener{
             NewPaymentMethodBottomSheet().show(parentFragmentManager, "SomeTagHere")
+        }
+        binding.select.setOnClickListener {
+            val navController = Navigation.findNavController(view)
+            navController.navigate(R.id.checkOutFragment)
         }
     }
 

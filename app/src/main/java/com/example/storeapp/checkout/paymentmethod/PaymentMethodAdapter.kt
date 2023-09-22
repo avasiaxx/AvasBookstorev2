@@ -31,13 +31,13 @@ class PaymentMethodAdapter(
                     previousBinding?.root?.setBackgroundColor(binding.root.context.getColor(R.color.white))
                     previousBinding?.selected?.setImageResource(R.drawable.baseline_check_circle_outline_24)
                     previousBinding = binding
+                    onPaymentMethodSelected(paymentInfo)
                 } else{
                     previousBinding?.root?.setBackgroundColor(binding.root.context.getColor(R.color.white))
                     previousBinding?.selected?.setImageResource(R.drawable.baseline_check_circle_outline_24)
                     binding.root.setBackgroundColor(binding.root.context.getColor(R.color.selected))
                     binding.selected.setImageResource(R.drawable.baseline_check_circle_24)
                     previousBinding = binding
-                    onPaymentMethodSelected(paymentInfo)
                 }
             }
         }

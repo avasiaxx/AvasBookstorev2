@@ -48,9 +48,10 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
             val navController = Navigation.findNavController(view)
             navController.navigate(R.id.paymentMethodFragment)
         }
-        binding.paymentMethodFiller.text =
-            checkOutViewModel.formatUserCC()
         binding.address.text = checkOutViewModel.formatShippingAddress()
+        checkOutViewModel.primaryPaymentMethod.observe(viewLifecycleOwner){
+            binding.paymentMethodFiller.text = checkOutViewModel.formatUserCC()
+        }
     }
 
     override fun onResume() {

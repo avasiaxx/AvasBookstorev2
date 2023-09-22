@@ -89,6 +89,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
             NewPaymentMethodBottomSheet().show(parentFragmentManager, "SomeTagHere")
         }
         binding.select.setOnClickListener {
+            paymentMethodViewModel.savePaymentMethod()
             val navController = Navigation.findNavController(view)
             navController.navigate(R.id.checkOutFragment)
         }

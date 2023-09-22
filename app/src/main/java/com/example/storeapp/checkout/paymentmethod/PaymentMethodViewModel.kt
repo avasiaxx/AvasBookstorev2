@@ -22,9 +22,10 @@ class PaymentMethodViewModel @Inject constructor(
     private val _currentPaymentMethods = MutableLiveData<List<PaymentInfo>?>(emptyList())
 
     val user: User = userRepository.getUser()
-
     val items: LiveData<List<PaymentInfo>?>
         get() = _currentPaymentMethods
+
+    lateinit var selectedPaymentMethod: PaymentInfo
 
     fun init(){
         paymentMethods = datasource.loadPaymentInfo()
@@ -54,9 +55,13 @@ class PaymentMethodViewModel @Inject constructor(
     }
 
     fun onPaymentMethodSelected(paymentInfo: PaymentInfo){
+        selectedPaymentMethod = paymentInfo
+    }
+
+    fun savePaymentMethod(){
         for(paymentMethods in paymentMethods){
-            if(paymentMethods.id == paymentInfo.id){
-                user.account.primaryPaymentInfo = paymentInfo
+            if(paymentMethods.id == selectedPaymentMethod.id){
+                user.account.primaryPaymentInfo = selectedPaymentMethod
             }
         }
     }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.data.models.Order
+import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.data.testdata.User
 import com.example.storeapp.domain.CCAsterisksFormatter
 import com.example.storeapp.domain.CurrencyFormatter
@@ -32,10 +33,15 @@ class CheckOutViewModel @Inject constructor(
 
     val items: LiveData<List<CartItem>> get() = _currentCartItems
 
+    private var _primaryPaymentMethod = MutableLiveData<PaymentInfo>()
+    val primaryPaymentMethod: LiveData<PaymentInfo>
+        get() = _primaryPaymentMethod
+
     fun init(){
         order = orderRepository.loadOrder()
         cartItems = order.cart.items
         _currentCartItems.value = cartItems
+        _primaryPaymentMethod.value = user.account.primaryPaymentInfo
     }
     fun getFormattedSubTotal(): String{
         return currencyFormatter.formatCurrency(order.subTotal)

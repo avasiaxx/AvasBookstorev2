@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@color/material_dynamic_neutral_variant90">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="fitCenter"
+            android:layout_margin="15dp"
+            tools:src="@drawable/item1"/>
+
+        <TextView
+            android:id="@+id/item_name"
+            tools:text="Test Item Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/item_image"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="150dp"
+            android:layout_margin="15dp"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/item_quantity"
+            android:text="@string/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/item_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/material_dynamic_neutral20"/>
+
+        <TextView
+            android:id="@+id/quantity_number"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="@string/_0"
+            android:textColor="@color/material_dynamic_neutral_variant20"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/item_quantity"
+            app:layout_constraintStart_toStartOf="@+id/item_quantity"
+            app:layout_constraintEnd_toEndOf="@id/item_quantity"
+            />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0_00"
+            app:layout_constraintTop_toBottomOf="@id/quantity_number"
+            app:layout_constraintStart_toStartOf="@id/quantity_number"
+            app:layout_constraintEnd_toEndOf="@+id/quantity_number"
+            android:textColor="@color/material_dynamic_neutral20"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+

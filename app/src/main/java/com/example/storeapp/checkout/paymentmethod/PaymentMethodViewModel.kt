@@ -5,22 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.storeapp.data.Datasource
 import com.example.storeapp.data.models.PaymentInfo
+import com.example.storeapp.data.testdata.User
+import com.example.storeapp.domain.CCAsterisksFormatter
+import com.example.storeapp.domain.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 //Map a Display model for the selected item
 @HiltViewModel
 class PaymentMethodViewModel @Inject constructor(
-    var datasource: Datasource
+    var datasource: Datasource,
+    private var ccAsterisksFormatter: CCAsterisksFormatter,
+    userRepository: UserRepository
 ): ViewModel() {
-    companion object {
-        private const val MAX_CHARACTER_COUNT = 12
-    }
+
     private lateinit var paymentMethods: List<PaymentInfo>
     private val _currentPaymentMethods = MutableLiveData<List<PaymentInfo>?>(emptyList())
 
-
+    val user: User = userRepository.getUser()
     val items: LiveData<List<PaymentInfo>?>
         get() = _currentPaymentMethods
+
+    lateinit var selectedPaymentMethod: PaymentInfo
 
     fun init(){
         paymentMethods = datasource.loadPaymentInfo()
@@ -30,10 +35,7 @@ class PaymentMethodViewModel @Inject constructor(
 
     private fun convertToAsterisks(){
         for(paymentMethod in paymentMethods){
-            val ccNumber = paymentMethod.card
-            val replaced: String = ccNumber.replaceRange(0, MAX_CHARACTER_COUNT,
-                "*".repeat(MAX_CHARACTER_COUNT))
-            paymentMethod.card = replaced
+            paymentMethod.card = ccAsterisksFormatter.convertToAsterisks(paymentMethod)
         }
     }
 
@@ -50,5 +52,17 @@ class PaymentMethodViewModel @Inject constructor(
         paymentMethods = current?.toList()!!
         convertToAsterisks()
         _currentPaymentMethods.value = paymentMethods
+    }
+
+    fun onPaymentMethodSelected(paymentInfo: PaymentInfo){
+        selectedPaymentMethod = paymentInfo
+    }
+
+    fun savePaymentMethod(){
+        for(paymentMethods in paymentMethods){
+            if(paymentMethods.id == selectedPaymentMethod.id){
+                user.account.primaryPaymentInfo = selectedPaymentMethod
+            }
+        }
     }
 }

@@ -7,8 +7,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.checkout.paymentmethod.bottomsheet.NewPaymentMethodBottomSheet
@@ -40,9 +40,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
 
     private lateinit var adapter: PaymentMethodAdapter
 
-    private val checkoutViewModel: PaymentMethodViewModel by activityViewModels()
-
-    private var columnCount = 1
+    private val paymentMethodViewModel: PaymentMethodViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +58,9 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPaymentmethodsBinding.bind(view)
-        adapter = PaymentMethodAdapter()
+        adapter = PaymentMethodAdapter(paymentMethodViewModel::onPaymentMethodSelected)
         binding.recyclerView.apply {
-            layoutManager = when{
-                columnCount <= 1 -> LinearLayoutManager(context)
-                else -> GridLayoutManager(context, columnCount)
-            }
+            layoutManager = LinearLayoutManager(context)
             adapter = this@PaymentMethodFragment.adapter
             addSwipeDeleteListener {  position ->
                 AlertDialog.Builder(context)
@@ -75,7 +70,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
                     // The dialog is automatically dismissed when a dialog button is clicked.
                     .setPositiveButton(android.R.string.ok
                     ) { _, _ ->
-                        checkoutViewModel.deletePosition(position)
+                        paymentMethodViewModel.deletePosition(position)
                         this@PaymentMethodFragment.adapter.notifyItemRemoved(position)
                         // Continue with delete operation
                     } // A null listener allows the button to dismiss the dialog and take no further action.
@@ -86,12 +81,17 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
                     .show()
             }
         }
-        checkoutViewModel.init()
-        checkoutViewModel.items.observe(viewLifecycleOwner){
+        paymentMethodViewModel.init()
+        paymentMethodViewModel.items.observe(viewLifecycleOwner){
             adapter.setItems(it)
         }
         binding.add.setOnClickListener{
             NewPaymentMethodBottomSheet().show(parentFragmentManager, "SomeTagHere")
+        }
+        binding.select.setOnClickListener {
+            paymentMethodViewModel.savePaymentMethod()
+            val navController = Navigation.findNavController(view)
+            navController.navigate(R.id.checkOutFragment)
         }
     }
 

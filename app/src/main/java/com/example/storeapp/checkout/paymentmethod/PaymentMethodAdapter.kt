@@ -7,7 +7,9 @@ import com.example.storeapp.R
 import com.example.storeapp.data.models.PaymentInfo
 import com.example.storeapp.databinding.PaymentItemBinding
 
-class PaymentMethodAdapter: RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder>() {
+class PaymentMethodAdapter(
+    private val onPaymentMethodSelected: (PaymentInfo) -> Unit
+): RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder>() {
 
     private val values = mutableListOf<PaymentInfo>()
 
@@ -29,6 +31,7 @@ class PaymentMethodAdapter: RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder
                     previousBinding?.root?.setBackgroundColor(binding.root.context.getColor(R.color.white))
                     previousBinding?.selected?.setImageResource(R.drawable.baseline_check_circle_outline_24)
                     previousBinding = binding
+                    onPaymentMethodSelected(paymentInfo)
                 } else{
                     previousBinding?.root?.setBackgroundColor(binding.root.context.getColor(R.color.white))
                     previousBinding?.selected?.setImageResource(R.drawable.baseline_check_circle_outline_24)
@@ -55,7 +58,6 @@ class PaymentMethodAdapter: RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.bind(item)
-
     }
 
     fun setItems(items: List<PaymentInfo>?){

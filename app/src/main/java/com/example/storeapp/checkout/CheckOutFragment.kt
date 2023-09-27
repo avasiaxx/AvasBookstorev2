@@ -59,12 +59,12 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    //Return to home on back button
+    //Return to cart on back button
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             android.R.id.home -> {
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.cartFragment)
                 true
             }
             else -> { false }

@@ -4,6 +4,8 @@ import StoreAdapter
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -34,36 +36,38 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
 
     private lateinit var adapter: StoreAdapter
 
+    private val menuProvider by lazy {
+        object: MenuProvider {
+            var searchItem: MenuItem? = null
+            var searchView: SearchView? = null
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.options_menu, menu)
+                searchItem = menu.findItem(R.id.search)
+                searchView = searchItem?.actionView as SearchView
+                searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(p0: String?): Boolean {
+                        return false
+                    }
+
+                    override fun onQueryTextChange(msg: String): Boolean {
+                        // inside on query text change method we are
+                        // calling a method to filter our recycler view.
+                        storeViewModel.sortItems(msg)
+                        return false
+                    }
+                })
+            }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             COLUMN_COUNT = it.getInt(ARG_COLUMN_COUNT)
         }
-    }
-
-
-    //TODO Code is not being used - need to loop back & implement this search view
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu, menu)
-
-        val searchItem: MenuItem = menu.findItem(R.id.search)
-
-        val searchView: SearchView = searchItem.actionView as SearchView
-
-        // below line is to call set on query text listener method.
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(msg: String): Boolean {
-                // inside on query text change method we are
-                // calling a method to filter our recycler view.
-                storeViewModel.sortItems(msg)
-                return false
-            }
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,10 +86,16 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         storeViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
+        activity?.addMenuProvider(menuProvider)
     }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.removeMenuProvider(menuProvider)
     }
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"

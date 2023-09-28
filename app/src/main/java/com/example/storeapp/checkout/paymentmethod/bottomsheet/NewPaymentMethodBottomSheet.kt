@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class NewPaymentMethodBottomSheet() : BottomSheetDialogFragment(R.layout.fragment_new_payment_method) {
+class NewPaymentMethodBottomSheet : BottomSheetDialogFragment(R.layout.fragment_new_payment_method) {
 
     private var selectedDate : Long = 0
 

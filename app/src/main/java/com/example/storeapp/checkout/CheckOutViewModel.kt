@@ -59,7 +59,8 @@ class CheckOutViewModel @Inject constructor(
 
     fun formatUserCC(): String{
         return ccAsterisksFormatter.convertToAsterisks(
-            accountRepository.account.primaryPaymentInfo)
+            accountRepository.account.primaryPaymentInfo
+        )
     }
 
     fun formatShippingAddress(): String{

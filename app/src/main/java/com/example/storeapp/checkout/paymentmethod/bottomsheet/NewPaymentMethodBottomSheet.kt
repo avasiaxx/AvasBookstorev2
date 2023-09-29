@@ -105,44 +105,49 @@ class NewPaymentMethodBottomSheet : BottomSheetDialogFragment(R.layout.fragment_
             val cc: String = binding.ccInput.text.toString()
             val expDate: String = expDateTextInput.text.toString()
             val name: String = binding.nameInput.text.toString()
-            var valid = false
+            var valid = true
 
-            if(expDate.isEmpty()){
+            if(expDate.isEmpty()) {
                 binding.ccDate.error = "Please select a date"
             } else {
                 binding.ccDate.error = null
+                valid = false
             }
-            if(name.isEmpty()){
+            if(name.isEmpty()) {
                 binding.name.error = "Please enter a valid name"
             } else {
                 binding.name.error = null
+                valid = false
             }
             if (!validator.checkCreditCard(cc) || cc.isEmpty()) {
                 binding.creditCardNumber.error = "Improper Credit Card Number"
             } else {
                 binding.creditCardNumber.error = null
+                valid = false
             }
             if (!validator.checkCCV(ccv) || ccv.isEmpty()) {
                 binding.ccv.error = "Improper CCV"
                 valid = false
             } else {
                 binding.ccv.error = null
-                valid = true
             }
-            if(valid){
+            if(valid) {
                 createPaymentMethod(cc, expDate, ccv)
-                }
             }
         }
+    }
 
     private fun createPaymentMethod(
         cc: String,
         expDate: String,
-        ccv: String) {
-        checkoutViewModel.addNewPaymentMethod(3,
+        ccv: String
+    ) {
+        checkoutViewModel.addNewPaymentMethod(
+            3,
             cc,
             expDate,
-            ccv.toInt())
+            ccv.toInt()
+        )
         dismiss()
     }
 

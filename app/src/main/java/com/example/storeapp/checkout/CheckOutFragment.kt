@@ -57,14 +57,9 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
             AlertDialog.Builder(context)
                 .setTitle("Login To Finish Order")
                 .setMessage("Would you like to login?")
-                // Specifying a listener allows you to take an action before dismissing the dialog.
-                // The dialog is automatically dismissed when a dialog button is clicked.
                 .setPositiveButton(android.R.string.ok
                 ) { _, _ ->
                     navController.navigate(R.id.loginFragment)
-                    // Continue with delete operation
-                } // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton(android.R.string.cancel) { _, _ ->
                 }
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()

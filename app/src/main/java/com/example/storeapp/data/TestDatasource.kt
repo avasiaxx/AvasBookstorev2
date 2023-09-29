@@ -35,10 +35,18 @@ class TestDatasource @Inject constructor(
     )
 
     private val paymentMethods: List<PaymentInfo> = listOf(
-        PaymentInfo(1, context.getString(R.string.credit_card_number),
-            context.getString(R.string.exp_date), context.getString(R.string.ccv).toInt()),
-        PaymentInfo(2, context.getString(R.string.credit_card_number2),
-            context.getString(R.string.exp_date2), context.getString(R.string.ccv2).toInt()),
+        PaymentInfo(
+            1,
+            context.getString(R.string.credit_card_number),
+            context.getString(R.string.exp_date),
+            context.getString(R.string.ccv).toInt()
+        ),
+        PaymentInfo(
+            2,
+            context.getString(R.string.credit_card_number2),
+            context.getString(R.string.exp_date2),
+            context.getString(R.string.ccv2).toInt()
+        ),
     )
 
     private val account: Account = Account(
@@ -48,7 +56,8 @@ class TestDatasource @Inject constructor(
         paymentMethods.first(),
         "admin",
         isCustomer = true,
-        isManager = true)
+        isManager = true
+    )
 
     private val login: Login = Login(
         account.userName,
@@ -56,12 +65,42 @@ class TestDatasource @Inject constructor(
     )
 
     private val inventory: List<StoreItem> = listOf(
-        StoreItem(1, context.getString(R.string.item_1_name), context.getString(R.string.item_description_1), 1.99 ),
-        StoreItem(2, context.getString(R.string.item_2_name), context.getString(R.string.item_description_1), 1.99 ),
-        StoreItem(3, context.getString(R.string.item_3_name), context.getString(R.string.item_description_1), 1.99 ),
-        StoreItem(4, context.getString(R.string.item_4_name), context.getString(R.string.item_description_1), 1.99 ),
-        StoreItem(5, context.getString(R.string.item_5_name), context.getString(R.string.item_description_1), 1.99 ),
-        StoreItem(6, context.getString(R.string.item_6_name), context.getString(R.string.item_description_1), 1.99 )
+        StoreItem(
+            1,
+            context.getString(R.string.item_1_name),
+            context.getString(R.string.item_description_1),
+            1.99
+        ),
+        StoreItem(
+            2,
+            context.getString(R.string.item_2_name),
+            context.getString(R.string.item_description_1),
+            1.99
+        ),
+        StoreItem(
+            3,
+            context.getString(R.string.item_3_name),
+            context.getString(R.string.item_description_1),
+            1.99
+        ),
+        StoreItem(
+            4,
+            context.getString(R.string.item_4_name),
+            context.getString(R.string.item_description_1),
+            1.99
+        ),
+        StoreItem(
+            5,
+            context.getString(R.string.item_5_name),
+            context.getString(R.string.item_description_1),
+            1.99
+        ),
+        StoreItem(
+            6,
+            context.getString(R.string.item_6_name),
+            context.getString(R.string.item_description_1),
+            1.99
+        )
     )
 
     override fun loadItems(): List<StoreItem> {

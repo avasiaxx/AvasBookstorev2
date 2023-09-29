@@ -2,12 +2,13 @@ package com.example.storeapp.data
 
 import android.content.Context
 import com.example.storeapp.R
-import com.example.storeapp.account.AccountItem
 import com.example.storeapp.data.models.Account
+import com.example.storeapp.data.models.Address
 import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.PaymentInfo
+import com.example.storeapp.data.models.Person
 import com.example.storeapp.data.models.StoreItem
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -16,46 +17,80 @@ class TestDatasource @Inject constructor(
     @ApplicationContext private val context: Context
 ): Datasource{
 
+
+    private val person: Person = Person(
+        1,
+        "Markus Clarence",
+        "markusclarence34@gmail.com",
+        "123-234-1234"
+    )
+
+    private val address: Address = Address(
+        1,
+        "439 Port Washington Road.",
+        "Milk River",
+        "AL",
+        "T0K 1M0",
+        "Canada"
+    )
+
+    private val paymentMethods: List<PaymentInfo> = listOf(
+        PaymentInfo(1, context.getString(R.string.credit_card_number),
+            context.getString(R.string.exp_date), context.getString(R.string.ccv).toInt()),
+        PaymentInfo(2, context.getString(R.string.credit_card_number2),
+            context.getString(R.string.exp_date2), context.getString(R.string.ccv2).toInt()),
+    )
+
+    private val account: Account = Account(
+        1,
+        person,
+        address,
+        paymentMethods.first(),
+        "admin",
+        isCustomer = true,
+        isManager = true)
+
+    private val login: Login = Login(
+        account.userName,
+        "123"
+    )
+
+    private val inventory: List<StoreItem> = listOf(
+        StoreItem(1, context.getString(R.string.item_1_name), context.getString(R.string.item_description_1), 1.99 ),
+        StoreItem(2, context.getString(R.string.item_2_name), context.getString(R.string.item_description_1), 1.99 ),
+        StoreItem(3, context.getString(R.string.item_3_name), context.getString(R.string.item_description_1), 1.99 ),
+        StoreItem(4, context.getString(R.string.item_4_name), context.getString(R.string.item_description_1), 1.99 ),
+        StoreItem(5, context.getString(R.string.item_5_name), context.getString(R.string.item_description_1), 1.99 ),
+        StoreItem(6, context.getString(R.string.item_6_name), context.getString(R.string.item_description_1), 1.99 )
+    )
+
     override fun loadItems(): List<StoreItem> {
-        return listOf(
-            StoreItem(1, context.getString(R.string.item_1_name), context.getString(R.string.item_description_1), 1.99 ),
-            StoreItem(2, context.getString(R.string.item_2_name), context.getString(R.string.item_description_1), 1.99 ),
-            StoreItem(3, context.getString(R.string.item_3_name), context.getString(R.string.item_description_1), 1.99 ),
-            StoreItem(4, context.getString(R.string.item_4_name), context.getString(R.string.item_description_1), 1.99 ),
-            StoreItem(5, context.getString(R.string.item_5_name), context.getString(R.string.item_description_1), 1.99 ),
-            StoreItem(6, context.getString(R.string.item_6_name), context.getString(R.string.item_description_1), 1.99 )
-        )
+        return inventory
     }
 
     //Load Test Data for User Payment Info
     override fun loadPaymentInfo(): List<PaymentInfo> {
-        return listOf(
-            PaymentInfo(1, context.getString(R.string.credit_card_number),
-                context.getString(R.string.exp_date), context.getString(R.string.ccv).toInt()),
-            PaymentInfo(2, context.getString(R.string.credit_card_number2),
-                context.getString(R.string.exp_date2), context.getString(R.string.ccv2).toInt()),
-        )
+        return paymentMethods
+    }
+
+    override fun loadTestLogin(): Login {
+        return login
     }
 
     override fun getOrder(): Order {
         TODO("Not yet implemented")
     }
 
-    fun loadSettingOptions(
-    ):
-        List<AccountItem>{
-            return listOf(
-                AccountItem.getOptions(context, R.string.login_security, R.drawable.login_security_icon, R.string.login_security_description),
-                AccountItem.getOptions(context, R.string.manage_payment_information, R.drawable.payment_icon, R.string.manage_payment_information_description),
-                AccountItem.getOptions(context, R.string.your_addresses, R.drawable.address_icon, R.string.your_addresses_description),
-                AccountItem.getOptions(context, R.string.help_center, R.drawable.help_center_icon, R.string.help_center_description),
-                AccountItem.getOptions(context, R.string.settings, R.drawable.settings_icon, R.string.settings_description),
-                AccountItem.getOptions(context, R.string.contact_us, R.drawable.contact_support_icon, R.string.contact_us_description)
-            )
+    override fun loadAccount(login: Login): Account {
+        return account
     }
 
-    override fun loadAccount(login: Login): Account {
-        TODO("Not yet implemented")
+    override fun loadAddress(): Address {
+        return address
+    }
+
+    override fun loadPerson(): Person {
+        return person
     }
 
     override fun loadCart(): Cart {

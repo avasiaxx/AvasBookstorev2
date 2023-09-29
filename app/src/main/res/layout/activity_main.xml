@@ -32,6 +32,8 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:titleMarginTop="15dp"
+        android:background="@color/design_default_color_primary"
         app:theme="@style/AppTheme.Toolbar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

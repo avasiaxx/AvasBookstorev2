@@ -1,10 +1,12 @@
 package com.example.storeapp.data
 
 import com.example.storeapp.data.models.Account
+import com.example.storeapp.data.models.Address
 import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Login
 import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.PaymentInfo
+import com.example.storeapp.data.models.Person
 import com.example.storeapp.data.models.StoreItem
 import com.example.storeapp.data.service.ApiInterface
 import javax.inject.Inject
@@ -25,6 +27,14 @@ class NetworkDatasource @Inject constructor(
         return accountResponse.body()!!
     }
 
+    override fun loadAddress(): Address {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadPerson(): Person {
+        TODO("Not yet implemented")
+    }
+
     override fun loadCart(): Cart {
         TODO("Not yet implemented")
     }
@@ -43,6 +53,10 @@ class NetworkDatasource @Inject constructor(
     }
 
     override fun loadPaymentInfo(): List<PaymentInfo> {
+        TODO("Not yet implemented")
+    }
+
+    override fun loadTestLogin(): Login {
         TODO("Not yet implemented")
     }
 

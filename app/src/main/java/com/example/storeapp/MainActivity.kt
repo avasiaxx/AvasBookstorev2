@@ -40,11 +40,11 @@ class MainActivity : AppCompatActivity() {
 //                    navController.navigate(R.id.ordersFragment)
 //                    return@setOnItemSelectedListener true
                 //}
-                R.id.account ->{
-                    navController.navigate(R.id.accountFragment)
-                    Activity().title = "Your Account"
-                    return@setOnItemSelectedListener true
-                }
+//                R.id.account ->{
+//                    navController.navigate(R.id.accountFragment)
+//                    Activity().title = "Your Account"
+//                    return@setOnItemSelectedListener true
+//                }
             }
             false
         }

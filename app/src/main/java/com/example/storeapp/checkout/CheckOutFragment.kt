@@ -1,5 +1,6 @@
 package com.example.storeapp.checkout
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -30,6 +31,7 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = Navigation.findNavController(view)
         _binding = FragmentCheckoutBinding.bind(view)
         adapter = CheckOutAdapter()
         binding.orderRecyclerView.apply{
@@ -45,12 +47,27 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
         binding.taxAmountDisplay.text = checkOutViewModel.getFormattedTax()
         binding.orderTotalDisplay.text = checkOutViewModel.getFormattedTotal()
         binding.changeMethod.setOnClickListener {
-            val navController = Navigation.findNavController(view)
             navController.navigate(R.id.paymentMethodFragment)
         }
         binding.address.text = checkOutViewModel.formatShippingAddress()
         checkOutViewModel.primaryPaymentMethod.observe(viewLifecycleOwner){
             binding.paymentMethodFiller.text = checkOutViewModel.formatUserCC()
+        }
+        binding.FinishOrder.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle("Login To Finish Order")
+                .setMessage("Would you like to login?")
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.ok
+                ) { _, _ ->
+                    navController.navigate(R.id.loginFragment)
+                    // Continue with delete operation
+                } // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
         }
     }
 

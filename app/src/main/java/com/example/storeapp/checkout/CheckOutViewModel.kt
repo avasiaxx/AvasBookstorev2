@@ -6,12 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.data.models.Order
 import com.example.storeapp.data.models.PaymentInfo
-import com.example.storeapp.data.testdata.User
 import com.example.storeapp.domain.CCAsterisksFormatter
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.AddressFormatter
+import com.example.storeapp.domain.repositories.AccountRepository
 import com.example.storeapp.domain.repositories.OrderRepository
-import com.example.storeapp.domain.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,17 +18,15 @@ import javax.inject.Inject
 class CheckOutViewModel @Inject constructor(
     private var orderRepository: OrderRepository,
     private var currencyFormatter: CurrencyFormatter,
-    userRepository: UserRepository,
     private var ccAsterisksFormatter: CCAsterisksFormatter,
-    private var addressFormatter: AddressFormatter
+    private var addressFormatter: AddressFormatter,
+    private var accountRepository: AccountRepository
 ): ViewModel(){
 
     private lateinit var order: Order
 
     private lateinit var cartItems: List<CartItem>
     private val _currentCartItems = MutableLiveData<List<CartItem>>(emptyList())
-
-    var user:User = userRepository.getUser()
 
     val items: LiveData<List<CartItem>> get() = _currentCartItems
 
@@ -41,7 +38,7 @@ class CheckOutViewModel @Inject constructor(
         order = orderRepository.loadOrder()
         cartItems = order.cart.items
         _currentCartItems.value = cartItems
-        _primaryPaymentMethod.value = user.account.primaryPaymentInfo
+        _primaryPaymentMethod.value = accountRepository.account.primaryPaymentInfo
     }
     fun getFormattedSubTotal(): String{
         return currencyFormatter.formatCurrency(order.subTotal)
@@ -61,11 +58,15 @@ class CheckOutViewModel @Inject constructor(
     }
 
     fun formatUserCC(): String{
-        return ccAsterisksFormatter.convertToAsterisks(user.account.primaryPaymentInfo)
+        return ccAsterisksFormatter.convertToAsterisks(
+            accountRepository.account.primaryPaymentInfo
+        )
     }
 
     fun formatShippingAddress(): String{
-        return addressFormatter.formatAddress(user)
+        return addressFormatter.formatAddress(
+            accountRepository.account.primaryAddress
+        )
     }
     companion object {
         private const val SHIPPING_COST = 2.99

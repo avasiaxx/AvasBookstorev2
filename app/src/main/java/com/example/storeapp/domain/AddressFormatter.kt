@@ -1,8 +1,8 @@
 package com.example.storeapp.domain
 
-import com.example.storeapp.data.testdata.User
+import com.example.storeapp.data.models.Address
+
 
 interface AddressFormatter {
-
-    fun formatAddress(user: User): String
+    fun formatAddress(address: Address): String
 }

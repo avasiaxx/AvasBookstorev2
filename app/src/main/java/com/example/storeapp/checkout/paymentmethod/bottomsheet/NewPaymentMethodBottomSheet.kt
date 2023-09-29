@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class NewPaymentMethodBottomSheet() : BottomSheetDialogFragment(R.layout.fragment_new_payment_method) {
+class NewPaymentMethodBottomSheet : BottomSheetDialogFragment(R.layout.fragment_new_payment_method) {
 
     private var selectedDate : Long = 0
 
@@ -107,32 +107,47 @@ class NewPaymentMethodBottomSheet() : BottomSheetDialogFragment(R.layout.fragmen
             val name: String = binding.nameInput.text.toString()
             var valid = true
 
-            if(name.isEmpty()){
+            if(expDate.isEmpty()) {
+                binding.ccDate.error = "Please select a date"
+            } else {
+                binding.ccDate.error = null
+                valid = false
+            }
+            if(name.isEmpty()) {
                 binding.name.error = "Please enter a valid name"
+            } else {
+                binding.name.error = null
                 valid = false
             }
             if (!validator.checkCreditCard(cc) || cc.isEmpty()) {
                 binding.creditCardNumber.error = "Improper Credit Card Number"
+            } else {
+                binding.creditCardNumber.error = null
                 valid = false
-                }
+            }
             if (!validator.checkCCV(ccv) || ccv.isEmpty()) {
                 binding.ccv.error = "Improper CCV"
                 valid = false
-                }
-            if(valid){
+            } else {
+                binding.ccv.error = null
+            }
+            if(valid) {
                 createPaymentMethod(cc, expDate, ccv)
-                }
             }
         }
+    }
 
     private fun createPaymentMethod(
         cc: String,
         expDate: String,
-        ccv: String) {
-        checkoutViewModel.addNewPaymentMethod(3,
+        ccv: String
+    ) {
+        checkoutViewModel.addNewPaymentMethod(
+            3,
             cc,
             expDate,
-            ccv.toInt())
+            ccv.toInt()
+        )
         dismiss()
     }
 

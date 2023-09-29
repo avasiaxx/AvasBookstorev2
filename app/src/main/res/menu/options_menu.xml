@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <item android:id="@+id/search"
-        android:title="@string/search"
+    <item
+        android:id="@+id/search"
         android:icon="@drawable/search_icon"
+        android:iconTint="#FFFFFF"
+        android:title="@string/search"
+        app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.widget.SearchView" />
+        android:theme="@style/SearchViewStyle"/>
     </menu>

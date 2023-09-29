@@ -9,14 +9,20 @@ import com.example.storeapp.domain.CCAsterisksFormatterImpl
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.CurrencyFormatterImpl
 import com.example.storeapp.domain.AddressFormatterImpl
+import com.example.storeapp.domain.repositories.AccountRepository
+import com.example.storeapp.domain.repositories.AccountRepositoryImpl
+import com.example.storeapp.domain.repositories.AddressRepository
+import com.example.storeapp.domain.repositories.AddressRepositoryImpl
 import com.example.storeapp.domain.repositories.CartRepository
 import com.example.storeapp.domain.repositories.CartRepositoryImpl
 import com.example.storeapp.domain.repositories.InventoryRepository
 import com.example.storeapp.domain.repositories.InventoryRepositoryImpl
 import com.example.storeapp.domain.repositories.OrderRepository
 import com.example.storeapp.domain.repositories.OrderRepositoryImpl
-import com.example.storeapp.domain.repositories.UserRepository
-import com.example.storeapp.domain.repositories.UserRepositoryImpl
+import com.example.storeapp.domain.repositories.PaymentInfoRepository
+import com.example.storeapp.domain.repositories.PaymentInfoRepositoryImpl
+import com.example.storeapp.domain.repositories.PersonRepository
+import com.example.storeapp.domain.repositories.PersonRepositoryImpl
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -80,5 +86,18 @@ interface AppModule {
 
     @Singleton
     @Binds
-    fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+    fun bindAccountRepository(accountRepositoryImpl: AccountRepositoryImpl): AccountRepository
+
+    @Singleton
+    @Binds
+    fun bindPersonRepository(personRepositoryImpl: PersonRepositoryImpl): PersonRepository
+
+    @Singleton
+    @Binds
+    fun bindAddressRepository(addressRepositoryImpl: AddressRepositoryImpl): AddressRepository
+
+    @Singleton
+    @Binds
+    fun bindPaymentInfoRepository(paymentInfoRepositoryImpl: PaymentInfoRepositoryImpl): PaymentInfoRepository
+
 }

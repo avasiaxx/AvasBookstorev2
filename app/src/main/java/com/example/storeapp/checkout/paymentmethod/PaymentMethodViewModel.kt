@@ -3,32 +3,30 @@ package com.example.storeapp.checkout.paymentmethod
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.storeapp.data.Datasource
 import com.example.storeapp.data.models.PaymentInfo
-import com.example.storeapp.data.testdata.User
 import com.example.storeapp.domain.CCAsterisksFormatter
-import com.example.storeapp.domain.repositories.UserRepository
+import com.example.storeapp.domain.repositories.AccountRepository
+import com.example.storeapp.domain.repositories.PaymentInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 //Map a Display model for the selected item
 @HiltViewModel
 class PaymentMethodViewModel @Inject constructor(
-    var datasource: Datasource,
+    private var paymentInfoRepository: PaymentInfoRepository,
     private var ccAsterisksFormatter: CCAsterisksFormatter,
-    userRepository: UserRepository
+    private var accountRepository: AccountRepository
 ): ViewModel() {
 
     private lateinit var paymentMethods: List<PaymentInfo>
     private val _currentPaymentMethods = MutableLiveData<List<PaymentInfo>?>(emptyList())
 
-    val user: User = userRepository.getUser()
     val items: LiveData<List<PaymentInfo>?>
         get() = _currentPaymentMethods
 
-    lateinit var selectedPaymentMethod: PaymentInfo
+    private lateinit var selectedPaymentMethod: PaymentInfo
 
     fun init(){
-        paymentMethods = datasource.loadPaymentInfo()
+        paymentMethods = paymentInfoRepository.loadPaymentInfo()
         convertToAsterisks()
         _currentPaymentMethods.value = paymentMethods
     }
@@ -61,7 +59,7 @@ class PaymentMethodViewModel @Inject constructor(
     fun savePaymentMethod(){
         for(paymentMethods in paymentMethods){
             if(paymentMethods.id == selectedPaymentMethod.id){
-                user.account.primaryPaymentInfo = selectedPaymentMethod
+                accountRepository.account.primaryPaymentInfo = selectedPaymentMethod
             }
         }
     }

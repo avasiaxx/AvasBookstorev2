@@ -29,5 +29,5 @@ interface ApiInterface {
     ): Response<Cart>
 
     @GET("inventory")
-    fun getInventory():Response<List<StoreItem>>
+    fun getInventory(): Response<List<StoreItem>>
 }

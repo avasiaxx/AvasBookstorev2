@@ -5,11 +5,12 @@ import com.example.storeapp.data.models.CartItem
 import javax.inject.Inject
 
 class CartRepositoryImpl @Inject constructor(
-): CartRepository {
+) : CartRepository {
 
     private var cart: Cart = Cart(
         items = emptyList()
     )
+
     override fun updateCart(cartItems: MutableList<CartItem>?): Cart {
         if (cartItems != null) {
             cart.items = cartItems
@@ -17,7 +18,7 @@ class CartRepositoryImpl @Inject constructor(
         return cart
     }
 
-    override fun loadCart() : Cart{
+    override fun loadCart(): Cart {
         return cart
     }
 }

@@ -6,7 +6,7 @@ import java.time.format.FormatStyle
 import java.util.Locale
 import javax.inject.Inject
 
-class DateFormatterImpl @Inject constructor(): DateFormatter {
+class DateFormatterImpl @Inject constructor() : DateFormatter {
     override fun formatDate(date: LocalDateTime): String {
         val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
             .withLocale(Locale.getDefault())

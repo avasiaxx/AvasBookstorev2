@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class TestDatasource @Inject constructor(
     @ApplicationContext private val context: Context
-): Datasource{
+) : Datasource {
 
 
     private val person: Person = Person(
@@ -118,6 +118,14 @@ class TestDatasource @Inject constructor(
 
     override fun getOrder(): Order {
         TODO("Not yet implemented")
+    }
+
+    override fun login(login: Login): Boolean {
+        return login == this.login
+    }
+
+    override fun logout() {
+        // TODO: revoke authentication
     }
 
     override fun loadAccount(login: Login): Account {

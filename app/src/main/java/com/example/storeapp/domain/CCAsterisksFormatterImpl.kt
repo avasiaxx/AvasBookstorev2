@@ -3,7 +3,7 @@ package com.example.storeapp.domain
 import com.example.storeapp.data.models.PaymentInfo
 import javax.inject.Inject
 
-class CCAsterisksFormatterImpl @Inject constructor(): CCAsterisksFormatter {
+class CCAsterisksFormatterImpl @Inject constructor() : CCAsterisksFormatter {
 
     override fun convertToAsterisks(paymentInfo: PaymentInfo): String {
         val ccNumber = paymentInfo.card

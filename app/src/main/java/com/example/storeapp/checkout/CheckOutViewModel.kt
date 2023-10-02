@@ -21,7 +21,7 @@ class CheckOutViewModel @Inject constructor(
     private var ccAsterisksFormatter: CCAsterisksFormatter,
     private var addressFormatter: AddressFormatter,
     private var accountRepository: AccountRepository
-): ViewModel(){
+) : ViewModel() {
 
     private lateinit var order: Order
 
@@ -34,40 +34,42 @@ class CheckOutViewModel @Inject constructor(
     val primaryPaymentMethod: LiveData<PaymentInfo>
         get() = _primaryPaymentMethod
 
-    fun init(){
+    fun init() {
         order = orderRepository.loadOrder()
         cartItems = order.cart.items
         _currentCartItems.value = cartItems
         _primaryPaymentMethod.value = accountRepository.account.primaryPaymentInfo
     }
-    fun getFormattedSubTotal(): String{
+
+    fun getFormattedSubTotal(): String {
         return currencyFormatter.formatCurrency(order.subTotal)
     }
 
-    fun getFormattedShippingCost(): String{
+    fun getFormattedShippingCost(): String {
         return currencyFormatter.formatCurrency(SHIPPING_COST)
     }
 
-    fun getFormattedTax(): String{
+    fun getFormattedTax(): String {
         return currencyFormatter.formatCurrency(order.taxAmount)
     }
 
-    fun getFormattedTotal(): String{
+    fun getFormattedTotal(): String {
         val newTotal = order.total + SHIPPING_COST
         return currencyFormatter.formatCurrency(newTotal)
     }
 
-    fun formatUserCC(): String{
+    fun formatUserCC(): String {
         return ccAsterisksFormatter.convertToAsterisks(
             accountRepository.account.primaryPaymentInfo
         )
     }
 
-    fun formatShippingAddress(): String{
+    fun formatShippingAddress(): String {
         return addressFormatter.formatAddress(
             accountRepository.account.primaryAddress
         )
     }
+
     companion object {
         private const val SHIPPING_COST = 2.99
     }

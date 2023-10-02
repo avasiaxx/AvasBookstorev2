@@ -9,7 +9,7 @@ import com.example.storeapp.databinding.PaymentItemBinding
 
 class PaymentMethodAdapter(
     private val onPaymentMethodSelected: (PaymentInfo) -> Unit
-): RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder>() {
 
     private val values = mutableListOf<PaymentInfo>()
 
@@ -19,12 +19,13 @@ class PaymentMethodAdapter(
 
     inner class ViewHolder(
         private val binding: PaymentItemBinding
-    ): RecyclerView.ViewHolder(binding.root){
-        fun bind(paymentInfo: PaymentInfo){
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(paymentInfo: PaymentInfo) {
             binding.creditCardNumber.text = paymentInfo.card
-            binding.expiryDate.text = binding.root.context.getString(R.string.expires, paymentInfo.expiry)
+            binding.expiryDate.text =
+                binding.root.context.getString(R.string.expires, paymentInfo.expiry)
             binding.root.setOnClickListener {
-                if(!isSelected) {
+                if (!isSelected) {
                     binding.root.setBackgroundColor(binding.root.context.getColor(R.color.selected))
                     binding.selected.setImageResource(R.drawable.baseline_check_circle_24)
                     isSelected = !isSelected
@@ -32,7 +33,7 @@ class PaymentMethodAdapter(
                     previousBinding?.selected?.setImageResource(R.drawable.baseline_check_circle_outline_24)
                     previousBinding = binding
                     onPaymentMethodSelected(paymentInfo)
-                } else{
+                } else {
                     previousBinding?.root?.setBackgroundColor(binding.root.context.getColor(R.color.white))
                     previousBinding?.selected?.setImageResource(R.drawable.baseline_check_circle_outline_24)
                     binding.root.setBackgroundColor(binding.root.context.getColor(R.color.selected))
@@ -42,7 +43,7 @@ class PaymentMethodAdapter(
             }
         }
     }
-    
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             PaymentItemBinding.inflate(
@@ -60,10 +61,10 @@ class PaymentMethodAdapter(
         holder.bind(item)
     }
 
-    fun setItems(items: List<PaymentInfo>?){
-        this.values.apply{
+    fun setItems(items: List<PaymentInfo>?) {
+        this.values.apply {
             clear()
-            if (items != null){
+            if (items != null) {
                 addAll(items)
             }
         }

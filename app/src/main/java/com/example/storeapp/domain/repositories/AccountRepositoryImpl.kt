@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
     val datasource: Datasource
-): AccountRepository {
+) : AccountRepository {
 
     override lateinit var account: Account
     override fun fetchAccountInfo(login: Login) {

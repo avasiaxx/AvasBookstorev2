@@ -15,7 +15,7 @@ import com.example.storeapp.databinding.FragmentCheckoutBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
+class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
 
     private var _binding: FragmentCheckoutBinding? = null
     private val binding
@@ -29,17 +29,18 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
         _binding = FragmentCheckoutBinding.bind(view)
         adapter = CheckOutAdapter()
-        binding.orderRecyclerView.apply{
+        binding.orderRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@CheckOutFragment.adapter
         }
         checkOutViewModel.init()
-        checkOutViewModel.items.observe(viewLifecycleOwner){
+        checkOutViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
         binding.itemsTotalDisplay.text = checkOutViewModel.getFormattedSubTotal()
@@ -50,14 +51,15 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
             navController.navigate(R.id.paymentMethodFragment)
         }
         binding.address.text = checkOutViewModel.formatShippingAddress()
-        checkOutViewModel.primaryPaymentMethod.observe(viewLifecycleOwner){
+        checkOutViewModel.primaryPaymentMethod.observe(viewLifecycleOwner) {
             binding.paymentMethodFiller.text = checkOutViewModel.formatUserCC()
         }
         binding.FinishOrder.setOnClickListener {
             AlertDialog.Builder(context)
                 .setTitle("Login To Finish Order")
                 .setMessage("Would you like to login?")
-                .setPositiveButton(android.R.string.ok
+                .setPositiveButton(
+                    android.R.string.ok
                 ) { _, _ ->
                     navController.navigate(R.id.loginFragment)
                 }
@@ -74,12 +76,15 @@ class CheckOutFragment: Fragment(R.layout.fragment_checkout) {
     //Return to cart on back button
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> {
                 findNavController().navigate(R.id.cartFragment)
                 true
             }
-            else -> { false }
+
+            else -> {
+                false
+            }
         }
     }
 }

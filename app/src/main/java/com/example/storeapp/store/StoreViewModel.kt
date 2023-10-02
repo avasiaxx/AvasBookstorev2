@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StoreViewModel @Inject constructor(
     private var inventoryRepository: InventoryRepository,
-) : ViewModel(){
+) : ViewModel() {
 
     private lateinit var originalItems: List<StoreItem>
     private val _items = MutableLiveData<List<StoreItem>>(emptyList())
@@ -23,7 +23,7 @@ class StoreViewModel @Inject constructor(
         _items.value = originalItems
     }
 
-    fun sortItems(input: String){
+    fun sortItems(input: String) {
         _items.value = originalItems.filter {
             it.name.contains(input, ignoreCase = true)
         }

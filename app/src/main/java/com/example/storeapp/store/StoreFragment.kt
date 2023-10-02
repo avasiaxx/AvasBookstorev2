@@ -36,7 +36,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
     private lateinit var adapter: StoreAdapter
 
     private val menuProvider by lazy {
-        object: MenuProvider {
+        object : MenuProvider {
             var searchItem: MenuItem? = null
             var searchView: SearchView? = null
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -56,6 +56,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
                     }
                 })
             }
+
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return true
             }
@@ -87,6 +88,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         }
         activity?.addMenuProvider(menuProvider)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -96,6 +98,7 @@ class StoreFragment : Fragment(R.layout.fragment_store_list) {
         super.onPause()
         activity?.removeMenuProvider(menuProvider)
     }
+
     companion object {
         const val ARG_COLUMN_COUNT = "column-count"
         private var COLUMN_COUNT = 2

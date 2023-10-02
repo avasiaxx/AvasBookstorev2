@@ -23,6 +23,8 @@ import com.example.storeapp.domain.repositories.PaymentInfoRepository
 import com.example.storeapp.domain.repositories.PaymentInfoRepositoryImpl
 import com.example.storeapp.domain.repositories.PersonRepository
 import com.example.storeapp.domain.repositories.PersonRepositoryImpl
+import com.example.storeapp.domain.repositories.LoginRepository
+import com.example.storeapp.domain.repositories.LoginRepositoryImpl
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -40,8 +42,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface AppModule {
 
-    companion object{
+    companion object {
         private const val BASEURL = "https://ovd.app:5796"
+
         @Provides
         fun provideApiInterface(): ApiInterface {
             val gson = GsonBuilder()
@@ -62,6 +65,7 @@ interface AppModule {
 
     @Binds
     fun bindAddressFormatter(addressFormatterImpl: AddressFormatterImpl): AddressFormatter
+
     @Binds
     fun bindCurrencyFormatter(currencyFormatterImpl: CurrencyFormatterImpl): CurrencyFormatter
 
@@ -99,5 +103,9 @@ interface AppModule {
     @Singleton
     @Binds
     fun bindPaymentInfoRepository(paymentInfoRepositoryImpl: PaymentInfoRepositoryImpl): PaymentInfoRepository
+
+    @Singleton
+    @Binds
+    fun bindLoginRepository(loginRepositoryImpl: LoginRepositoryImpl): LoginRepository
 
 }

@@ -4,12 +4,12 @@ import com.example.storeapp.data.models.Cart
 import com.example.storeapp.data.models.Order
 import javax.inject.Inject
 
-class OrderRepositoryImpl @Inject constructor(): OrderRepository {
+class OrderRepositoryImpl @Inject constructor() : OrderRepository {
 
     private lateinit var newOrder: Order
     override fun createOrder(
         id: Int?,
-        cart:Cart,
+        cart: Cart,
         orderDate: String,
         subTotal: Double,
         taxAmount: Double,
@@ -24,5 +24,6 @@ class OrderRepositoryImpl @Inject constructor(): OrderRepository {
             total
         )
     }
+
     override fun loadOrder(): Order = newOrder
 }

@@ -19,18 +19,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val bottomNavigationView = binding.bottomNavigation
         setupActionBarWithNavController(navController)
         setupWithNavController(bottomNavigationView, navController)
         bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.home -> {
                     navController.navigate(R.id.storeFragment)
                     supportActionBar?.title = "Ava's Bookstore"
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.cart -> {
                     navController.navigate(R.id.cartFragment)
                     Activity().title = "Your Cart"
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
         //Disable bottom navigation on checkout/payment methods screens
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.newPaymentMethodFragment ||
+            if (destination.id == R.id.newPaymentMethodFragment ||
                 destination.id == R.id.checkOutFragment ||
                 destination.id == R.id.paymentMethodFragment
             ) {

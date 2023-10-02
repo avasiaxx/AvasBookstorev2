@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class PersonRepositoryImpl @Inject constructor(
     private val datasource: Datasource
-): PersonRepository {
+) : PersonRepository {
     override fun loadPerson(): Person {
         TODO("Not yet implemented")
     }

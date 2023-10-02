@@ -71,7 +71,10 @@ class SwipeDeleteListener(
             )
             background.draw(c)
 
-            val deleteIcon = ContextCompat.getDrawable(recyclerView.context, R.drawable.baseline_delete_forever_24)
+            val deleteIcon = ContextCompat.getDrawable(
+                recyclerView.context,
+                R.drawable.baseline_delete_forever_24
+            )
             val intrinsicWidth = deleteIcon?.intrinsicWidth
             val intrinsicHeight = deleteIcon?.intrinsicHeight
 

@@ -18,7 +18,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private var cartRepository: CartRepository,
     private var orderRepository: OrderRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _currentCart = MutableLiveData<List<CartItem>?>(emptyList())
     val items: LiveData<List<CartItem>?>
@@ -38,29 +38,29 @@ class CartViewModel @Inject constructor(
         get() = _totalPrice
 
     fun onIncrease(cartItem: CartItem) {
-            val items = _currentCart.value?.toMutableList()
-            val item = items?.firstOrNull { it.storeItem.name == cartItem.storeItem.name }
+        val items = _currentCart.value?.toMutableList()
+        val item = items?.firstOrNull { it.storeItem.name == cartItem.storeItem.name }
 
-            if (item == null) {
-                items?.add(cartItem)
-            }else if(item.quantity > 0){
-                val index = items.indexOf(item)
-                items.remove(item)
-                items.add(
-                    index,
-                    item.copy(quantity = item.quantity.plus(1))
-                )
-            }
+        if (item == null) {
+            items?.add(cartItem)
+        } else if (item.quantity > 0) {
+            val index = items.indexOf(item)
+            items.remove(item)
+            items.add(
+                index,
+                item.copy(quantity = item.quantity.plus(1))
+            )
+        }
         _currentCart.value = items
         cartRepository.updateCart(items)
         updatePrices()
     }
 
-    fun onDecrease(cartItem: CartItem){
-            val items = _currentCart.value?.toMutableList() ?: return
-            val item = items.firstOrNull { cartItem.storeItem.name == it.storeItem.name }
-            val index = items.indexOf(item)
-            items.remove(item)
+    fun onDecrease(cartItem: CartItem) {
+        val items = _currentCart.value?.toMutableList() ?: return
+        val item = items.firstOrNull { cartItem.storeItem.name == it.storeItem.name }
+        val index = items.indexOf(item)
+        items.remove(item)
         if (item != null && item.quantity > 1) {
             items.add(
                 index,
@@ -72,7 +72,7 @@ class CartViewModel @Inject constructor(
         updatePrices()
     }
 
-    fun removeFromCart(cartItem: CartItem){
+    fun removeFromCart(cartItem: CartItem) {
         val items = _currentCart.value?.toMutableList() ?: return
         items.remove(cartItem)
         _currentCart.value = items
@@ -89,7 +89,8 @@ class CartViewModel @Inject constructor(
     fun checkIfCartIsEmpty(): Boolean {
         return _currentCart.value.isNullOrEmpty()
     }
-    fun createNewOrder(){
+
+    fun createNewOrder() {
         val today = Instant.now().toEpochMilli()
         val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.timeInMillis = today
@@ -97,7 +98,9 @@ class CartViewModel @Inject constructor(
         val simpleFormat = SimpleDateFormat("mm/dd/yyyy", Locale.CANADA)
         val date = Date(today)
 
-        orderRepository.createOrder(1, cartRepository.loadCart(), simpleFormat.format(date),
-            _subTotal.value!!, _tax.value!!, _totalPrice.value!!)
+        orderRepository.createOrder(
+            1, cartRepository.loadCart(), simpleFormat.format(date),
+            _subTotal.value!!, _tax.value!!, _totalPrice.value!!
+        )
     }
 }

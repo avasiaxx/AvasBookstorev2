@@ -10,7 +10,7 @@ class InventoryRepositoryImpl @Inject constructor(
 
     private var inventory: MutableList<StoreItem> = mutableListOf()
     override fun loadInventory(): List<StoreItem> {
-        if(inventory.isEmpty()){
+        if (inventory.isEmpty()) {
             inventory.addAll(datasource.loadItems())
         }
         return inventory

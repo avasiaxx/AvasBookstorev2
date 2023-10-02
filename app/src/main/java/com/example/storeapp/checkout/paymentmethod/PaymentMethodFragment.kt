@@ -50,6 +50,7 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
         }
         setHasOptionsMenu(true)
     }
+
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -62,13 +63,14 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@PaymentMethodFragment.adapter
-            addSwipeDeleteListener {  position ->
+            addSwipeDeleteListener { position ->
                 AlertDialog.Builder(context)
                     .setTitle("Delete Payment Method")
                     .setMessage("Are you sure you want to delete this payment method?")
                     // Specifying a listener allows you to take an action before dismissing the dialog.
                     // The dialog is automatically dismissed when a dialog button is clicked.
-                    .setPositiveButton(android.R.string.ok
+                    .setPositiveButton(
+                        android.R.string.ok
                     ) { _, _ ->
                         paymentMethodViewModel.deletePosition(position)
                         this@PaymentMethodFragment.adapter.notifyItemRemoved(position)
@@ -82,10 +84,10 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
             }
         }
         paymentMethodViewModel.init()
-        paymentMethodViewModel.items.observe(viewLifecycleOwner){
+        paymentMethodViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
-        binding.add.setOnClickListener{
+        binding.add.setOnClickListener {
             NewPaymentMethodBottomSheet().show(parentFragmentManager, "SomeTagHere")
         }
         binding.select.setOnClickListener {
@@ -98,12 +100,15 @@ class PaymentMethodFragment : Fragment(R.layout.fragment_paymentmethods) {
     //Returning to home screen with back button
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
+        return when (item.itemId) {
             android.R.id.home -> {
                 findNavController().popBackStack()
                 true
             }
-            else -> { false }
+
+            else -> {
+                false
+            }
         }
     }
 

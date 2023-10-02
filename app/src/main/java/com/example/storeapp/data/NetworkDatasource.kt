@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class NetworkDatasource @Inject constructor(
     private val apiInterface: ApiInterface
-    ): Datasource {
+) : Datasource {
     override fun loadAccount(login: Login): Account {
         val accountResponse = apiInterface.getAccount(login)
 
@@ -46,7 +46,7 @@ class NetworkDatasource @Inject constructor(
     override fun loadItems(): List<StoreItem> {
         val inventoryResponse = apiInterface.getInventory()
         var storeItems: List<StoreItem> = emptyList()
-        if(inventoryResponse.isSuccessful && inventoryResponse.body() != null){
+        if (inventoryResponse.isSuccessful && inventoryResponse.body() != null) {
             storeItems = inventoryResponse.body().orEmpty()
         }
         return storeItems
@@ -61,6 +61,14 @@ class NetworkDatasource @Inject constructor(
     }
 
     override fun getOrder(): Order {
+        TODO("Not yet implemented")
+    }
+
+    override fun login(login: Login): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun logout() {
         TODO("Not yet implemented")
     }
 }

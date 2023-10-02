@@ -1,4 +1,3 @@
-
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -44,7 +43,7 @@ class StoreAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    fun setItems(items: List<StoreItem>){
+    fun setItems(items: List<StoreItem>) {
         this.values.apply {
             clear()
             addAll(items)
@@ -56,23 +55,26 @@ class StoreAdapter(
         private val binding: FragmentStoreItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(storeItem: StoreItem){
+        fun bind(storeItem: StoreItem) {
             binding.itemTitle.text = storeItem.name
             binding.itemDescription.text = storeItem.description
             binding.itemImage.setImageResource(R.drawable.item1)
             binding.itemPrice.text = currencyFormatter.formatCurrency(storeItem.cost)
-            binding.addToCart.setOnClickListener{
+            binding.addToCart.setOnClickListener {
                 val cartItem = CartItem(1, storeItem, 1)
                 onIncrease(cartItem)
                 val suffix = "added to cart"
                 val spannable = SpannableStringBuilder("${storeItem.name} $suffix")
-                spannable.setSpan(ForegroundColorSpan(binding.root.context.getColor(R.color.teal_700)),
+                spannable.setSpan(
+                    ForegroundColorSpan(binding.root.context.getColor(R.color.teal_700)),
                     0, storeItem.name.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                spannable.setSpan(StyleSpan(Typeface.BOLD), 0, storeItem.name.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                Snackbar.make(binding.root, spannable, 300).
-                setAction("Close"){}
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                spannable.setSpan(
+                    StyleSpan(Typeface.BOLD), 0, storeItem.name.length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                Snackbar.make(binding.root, spannable, 300).setAction("Close") {}
                     .show()
             }
         }

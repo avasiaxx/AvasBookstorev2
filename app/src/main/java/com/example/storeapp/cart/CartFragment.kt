@@ -70,7 +70,7 @@ class CartFragment : Fragment(R.layout.fragment_cart_list) {
         binding.checkout.setOnClickListener {
             if(!cartViewModel.checkIfCartIsEmpty()){
                 val navController = findNavController(view)
-                navController.navigate(R.id.checkOutFragment)
+                navController.navigate(R.id.loginFragment)
                 cartViewModel.createNewOrder()
             } else{
                 Snackbar.make(binding.root, "No Items In Cart", 300)

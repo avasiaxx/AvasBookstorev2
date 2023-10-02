@@ -11,7 +11,7 @@ import com.example.storeapp.data.models.StoreItem
 
 interface Datasource {
 
-    fun loadAccount(login: Login):Account
+    fun loadAccount(login: Login): Account
 
     fun loadAddress(): Address
 
@@ -27,4 +27,8 @@ interface Datasource {
     fun loadTestLogin(): Login
 
     fun getOrder(): Order
+
+    fun login(login: Login): Boolean
+
+    fun logout()
 }

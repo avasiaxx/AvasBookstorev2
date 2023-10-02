@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class AddressRepositoryImpl @Inject constructor(
     val datasource: Datasource
-): AddressRepository {
+) : AddressRepository {
     override fun loadAddress(): Address {
         return datasource.loadAddress()
     }

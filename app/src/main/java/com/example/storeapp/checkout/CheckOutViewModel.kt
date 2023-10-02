@@ -10,6 +10,7 @@ import com.example.storeapp.domain.CCAsterisksFormatter
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.AddressFormatter
 import com.example.storeapp.domain.repositories.AccountRepository
+import com.example.storeapp.domain.repositories.LoginRepository
 import com.example.storeapp.domain.repositories.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -20,7 +21,8 @@ class CheckOutViewModel @Inject constructor(
     private var currencyFormatter: CurrencyFormatter,
     private var ccAsterisksFormatter: CCAsterisksFormatter,
     private var addressFormatter: AddressFormatter,
-    private var accountRepository: AccountRepository
+    private var accountRepository: AccountRepository,
+    loginRepository: LoginRepository
 ) : ViewModel() {
 
     private lateinit var order: Order
@@ -33,6 +35,10 @@ class CheckOutViewModel @Inject constructor(
     private var _primaryPaymentMethod = MutableLiveData<PaymentInfo>()
     val primaryPaymentMethod: LiveData<PaymentInfo>
         get() = _primaryPaymentMethod
+
+    val isLoggedIn:Boolean = loginRepository.isLoggedIn
+
+    var orderCreated: Boolean = false
 
     fun init() {
         order = orderRepository.loadOrder()

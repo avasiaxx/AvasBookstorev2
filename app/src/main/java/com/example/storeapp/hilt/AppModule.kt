@@ -9,6 +9,8 @@ import com.example.storeapp.domain.CCAsterisksFormatterImpl
 import com.example.storeapp.domain.CurrencyFormatter
 import com.example.storeapp.domain.CurrencyFormatterImpl
 import com.example.storeapp.domain.AddressFormatterImpl
+import com.example.storeapp.domain.Validator
+import com.example.storeapp.domain.ValidatorImpl
 import com.example.storeapp.domain.repositories.AccountRepository
 import com.example.storeapp.domain.repositories.AccountRepositoryImpl
 import com.example.storeapp.domain.repositories.AddressRepository
@@ -63,6 +65,8 @@ interface AppModule {
         }
     }
 
+    @Binds
+    fun bindValidator(validatorImpl: ValidatorImpl): Validator
     @Binds
     fun bindAddressFormatter(addressFormatterImpl: AddressFormatterImpl): AddressFormatter
 

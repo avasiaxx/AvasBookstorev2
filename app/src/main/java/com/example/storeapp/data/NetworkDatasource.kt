@@ -64,7 +64,7 @@ class NetworkDatasource @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun login(login: Login): Boolean {
+    override fun login(login: Login?): Boolean {
         TODO("Not yet implemented")
     }
 

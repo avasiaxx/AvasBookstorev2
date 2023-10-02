@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.newPaymentMethodFragment ||
                 destination.id == R.id.checkOutFragment ||
-                destination.id == R.id.paymentMethodFragment
+                destination.id == R.id.paymentMethodFragment ||
+                destination.id == R.id.loginFragment
             ) {
                 bottomNavigationView.visibility = View.GONE
             } else {

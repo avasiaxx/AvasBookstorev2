@@ -61,7 +61,7 @@ class TestDatasource @Inject constructor(
 
     private val login: Login = Login(
         account.userName,
-        "123"
+        "123456"
     )
 
     private val inventory: List<StoreItem> = listOf(
@@ -120,7 +120,7 @@ class TestDatasource @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun login(login: Login): Boolean {
+    override fun login(login: Login?): Boolean {
         return login == this.login
     }
 

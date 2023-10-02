@@ -141,4 +141,6 @@
     <string name="tax">Tax:</string>
     <string name="order_total">Order Total:</string>
     <string name="shipping">Shipping:</string>
+    <string name="username">Username</string>
+    <string name="sign_in">Sign In</string>
 </resources>

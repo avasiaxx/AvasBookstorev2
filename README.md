@@ -2,7 +2,7 @@
 Android Application of Ava's Bookstore
 
 
-<h1 align="center">Ava's Bookstore V2e</h1>
+<h1 align="center">Ava's Bookstore V2</h1>
 
 <p align="center">
 Overview:

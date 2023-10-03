@@ -25,8 +25,15 @@ Order Confirmation: Receive an instant order confirmation with all the details o
 
 ## Table of Contents
 - [Installation](#installation)
+- [VideoDemo](#videodemo)
 
 ## Installation
 Install via any Android device
 
+## Video Demo
+Check out our video demo to see how to use our app:
+
+[Watch the Video Demo](https://www.youtube.com/watch?v=YZGI9glc2bs)
+
+In this video, we walk you through the key features and functionality of our app.
 

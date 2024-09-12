@@ -9,16 +9,16 @@ class LoginRepositoryImpl @Inject constructor(
     private val dataSource: Datasource
 ) : LoginRepository {
 
-    private var loggedInUser: Login? = null
-    private var newLogin: Login? = null
-    private var isLoggedIn: Boolean = false
+    override var loggedInUser: Login? = null
+    override var newLogin: Login? = null
+    override var isLoggedIn: Boolean = false
 
     override fun logout() {
         dataSource.logout()
     }
 
     override fun login(username: String, password: String): String {
-        val newLogin = Login(
+        newLogin = Login(
             username,
             password
         )

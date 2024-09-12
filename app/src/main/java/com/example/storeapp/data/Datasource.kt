@@ -28,7 +28,7 @@ interface Datasource {
 
     fun getOrder(): Order
 
-    fun login(login: Login): Boolean
+    fun login(login: Login?): Boolean
 
     fun logout()
 }

@@ -1,17 +1,17 @@
 package com.example.storeapp.checkout
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storeapp.R
 import com.example.storeapp.databinding.FragmentCheckoutBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +21,7 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
     private val binding
         get() = _binding!!
 
-    private val checkOutViewModel: CheckOutViewModel by viewModels()
+    private val checkOutViewModel: CheckOutViewModel by activityViewModels()
 
     private lateinit var adapter: CheckOutAdapter
 
@@ -43,6 +43,13 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
         checkOutViewModel.items.observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
+        if(checkOutViewModel.isLoggedIn && !checkOutViewModel.orderCreated){
+            Snackbar.make(binding.root, "Successfully logged in",
+                500)
+                .setAction("Close") {}
+                .show()
+                checkOutViewModel.orderCreated = true
+        }
         binding.itemsTotalDisplay.text = checkOutViewModel.getFormattedSubTotal()
         binding.shippingToDisplay.text = checkOutViewModel.getFormattedShippingCost()
         binding.taxAmountDisplay.text = checkOutViewModel.getFormattedTax()
@@ -55,16 +62,7 @@ class CheckOutFragment : Fragment(R.layout.fragment_checkout) {
             binding.paymentMethodFiller.text = checkOutViewModel.formatUserCC()
         }
         binding.FinishOrder.setOnClickListener {
-            AlertDialog.Builder(context)
-                .setTitle("Login To Finish Order")
-                .setMessage("Would you like to login?")
-                .setPositiveButton(
-                    android.R.string.ok
-                ) { _, _ ->
-                    navController.navigate(R.id.loginFragment)
-                }
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show()
+
         }
     }
 

@@ -17,6 +17,6 @@ class ValidatorImpl @Inject constructor() : Validator {
     }
 
     override fun validUsername(username: String): Boolean {
-        return username.length > 5
+        return username.length >= 5
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.storeapp.data.models.CartItem
 import com.example.storeapp.domain.repositories.CartRepository
+import com.example.storeapp.domain.repositories.LoginRepository
 import com.example.storeapp.domain.repositories.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private var cartRepository: CartRepository,
-    private var orderRepository: OrderRepository
+    private var orderRepository: OrderRepository,
+    var loginRepository: LoginRepository
 ) : ViewModel() {
 
     private val _currentCart = MutableLiveData<List<CartItem>?>(emptyList())
@@ -36,6 +38,9 @@ class CartViewModel @Inject constructor(
     private val _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double>
         get() = _totalPrice
+    fun checkIfLoggedIn(): Boolean{
+        return loginRepository.isLoggedIn
+    }
 
     fun onIncrease(cartItem: CartItem) {
         val items = _currentCart.value?.toMutableList()
